@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Georgia", "Times New Roman", serif;
+  --font-sans: system-ui, "Segoe UI", Roboto, sans-serif;
+
+  --color-cream: #faf3e8;
+  --color-plum: #3b0f2b;
+  --color-berry: #9c1f5c;
+  --color-mint: #7fb8a4;
+  --color-citrus: #f4a637;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-cream);
+  color: var(--color-plum);
+  font-family: var(--font-sans);
+}
