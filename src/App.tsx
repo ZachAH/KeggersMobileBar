@@ -5,6 +5,7 @@ import { ProtectedRoute } from './components/ProtectedRoute'
 import { About } from './pages/About'
 import { Dashboard } from './pages/admin/Dashboard'
 import { Login } from './pages/admin/Login'
+import { Gallery } from './pages/Gallery'
 import { Home } from './pages/Home'
 import { Menu } from './pages/Menu'
 import { WhereWellBe } from './pages/WhereWellBe'
@@ -26,6 +27,7 @@ export default function App() {
           <Route element={<Layout />}>
             <Route index element={<Home />} />
             <Route path="menu" element={<Menu />} />
+            <Route path="gallery" element={<Gallery />} />
             <Route path="where-well-be" element={<WhereWellBe />} />
             <Route path="about" element={<About />} />
             <Route path="admin/login" element={<Login />} />

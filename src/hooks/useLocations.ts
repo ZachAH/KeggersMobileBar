@@ -8,7 +8,8 @@ import {
   orderBy,
   query,
 } from 'firebase/firestore'
-import { db } from '../lib/firebase'
+import { deleteObject, getDownloadURL, ref, uploadBytes } from 'firebase/storage'
+import { db, storage } from '../lib/firebase'
 import type { AppearanceLocation, NewAppearanceLocation } from '../types/location'
 
 const COLLECTION = 'locations'
@@ -29,9 +30,21 @@ export function useLocations() {
 export function useCreateLocation() {
   const queryClient = useQueryClient()
   return useMutation({
-    mutationFn: async (location: NewAppearanceLocation) => {
+    mutationFn: async ({ imageFile, ...location }: NewAppearanceLocation) => {
+      let image_url: string | null = null
+      let image_path: string | null = null
+
+      if (imageFile) {
+        image_path = `locations/${Date.now()}-${imageFile.name}`
+        const storageRef = ref(storage, image_path)
+        await uploadBytes(storageRef, imageFile)
+        image_url = await getDownloadURL(storageRef)
+      }
+
       await addDoc(collection(db, COLLECTION), {
         ...location,
+        image_url,
+        image_path,
         created_at: new Date().toISOString(),
       })
     },
@@ -42,8 +55,11 @@ export function useCreateLocation() {
 export function useDeleteLocation() {
   const queryClient = useQueryClient()
   return useMutation({
-    mutationFn: async (id: string) => {
-      await deleteDoc(doc(db, COLLECTION, id))
+    mutationFn: async (location: Pick<AppearanceLocation, 'id' | 'image_path'>) => {
+      if (location.image_path) {
+        await deleteObject(ref(storage, location.image_path)).catch(() => {})
+      }
+      await deleteDoc(doc(db, COLLECTION, location.id))
     },
     onSuccess: () => queryClient.invalidateQueries({ queryKey: [COLLECTION] }),
   })

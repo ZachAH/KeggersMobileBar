@@ -1,23 +1,34 @@
 export interface MenuItem {
   name: string
-  description: string
-  price: string
+  ingredients: string[]
+  color: string
 }
 
-export const menu: MenuItem[] = [
+export const seasonalMocktails: MenuItem[] = [
   {
-    name: 'Garden Spritz',
-    description: 'Cucumber, mint, elderflower, soda',
-    price: '$8',
+    name: 'Marigold Mule',
+    ingredients: ['Marigold tea syrup', 'Orange juice', 'Ginger beer (non-alcoholic)'],
+    color: 'bg-gold',
   },
   {
-    name: 'Smoke & Citrus',
-    description: 'Blood orange, chili, lime, smoked salt rim',
-    price: '$9',
+    name: 'Ginger Berry Fizz',
+    ingredients: [
+      'Blueberry syrup',
+      'Lemon juice',
+      'Pineapple juice',
+      'Ginger beer (non-alcoholic)',
+    ],
+    color: 'bg-teal',
   },
   {
-    name: 'Berry Fields',
-    description: 'Muddled blackberry, basil, lemon, tonic',
-    price: '$8',
+    name: 'Berry In Love',
+    ingredients: [
+      'Muddled mint leaves',
+      'Strawberry syrup',
+      'Rose water',
+      'Lemon juice',
+      'Ginger ale',
+    ],
+    color: 'bg-red',
   },
 ]

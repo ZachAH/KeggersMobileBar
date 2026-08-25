@@ -6,7 +6,14 @@ export interface AppearanceLocation {
   start_time: string // "17:00"
   end_time: string // "21:00"
   notes: string | null
+  image_url: string | null
+  image_path: string | null
   created_at: string
 }
 
-export type NewAppearanceLocation = Omit<AppearanceLocation, 'id' | 'created_at'>
+export type NewAppearanceLocation = Omit<
+  AppearanceLocation,
+  'id' | 'created_at' | 'image_url' | 'image_path'
+> & {
+  imageFile?: File | null
+}

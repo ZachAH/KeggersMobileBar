@@ -1,6 +1,7 @@
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { type FormEvent, useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
+import { SectionHeading } from '../../components/SectionHeading'
 import { useAuth } from '../../hooks/useAuth'
 import { auth } from '../../lib/firebase'
 
@@ -30,15 +31,18 @@ export function Login() {
 
   return (
     <div className="mx-auto max-w-sm">
-      <h1 className="font-display text-3xl">Admin Login</h1>
-      <form onSubmit={handleSubmit} className="mt-6 flex flex-col gap-4">
+      <SectionHeading>Admin Login</SectionHeading>
+      <form
+        onSubmit={handleSubmit}
+        className="mt-8 flex flex-col gap-4 rounded-lg border border-gold/20 bg-black/35 p-6 backdrop-blur-md"
+      >
         <input
           type="email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
-          className="rounded border border-plum/20 px-3 py-2"
+          className="rounded border border-ink/20 bg-cream px-3 py-2 text-ink"
         />
         <input
           type="password"
@@ -46,13 +50,13 @@ export function Login() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
-          className="rounded border border-plum/20 px-3 py-2"
+          className="rounded border border-ink/20 bg-cream px-3 py-2 text-ink"
         />
-        {error && <p className="text-sm text-berry">{error}</p>}
+        {error && <p className="text-sm text-gold">{error}</p>}
         <button
           type="submit"
           disabled={submitting}
-          className="rounded bg-plum px-4 py-2 text-cream disabled:opacity-50"
+          className="rounded bg-gold px-4 py-2 text-plum transition-colors hover:bg-cream disabled:opacity-50"
         >
           {submitting ? 'Signing in…' : 'Sign in'}
         </button>

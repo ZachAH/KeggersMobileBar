@@ -1,14 +1,20 @@
 @import "tailwindcss";
 
 @theme {
-  --font-display: "Georgia", "Times New Roman", serif;
-  --font-sans: system-ui, "Segoe UI", Roboto, sans-serif;
+  --font-script: "Alex Brush", cursive;
+  --font-serif: "Cormorant Garamond", "Times New Roman", serif;
+  --font-sans: "Jost", system-ui, "Segoe UI", Roboto, sans-serif;
 
-  --color-cream: #faf3e8;
-  --color-plum: #3b0f2b;
-  --color-berry: #9c1f5c;
-  --color-mint: #7fb8a4;
-  --color-citrus: #f4a637;
+  --color-cream: #f5f1e6;
+  --color-ink: #211d17;
+  --color-plum: #141210;
+
+  --color-pink: #96741c;
+  --color-purple: #3d1f3d;
+  --color-orange: #8a4a24;
+  --color-gold: #d4af37;
+  --color-teal: #145c3f;
+  --color-red: #6e1423;
 }
 
 html,
@@ -19,7 +25,56 @@ body,
 
 body {
   margin: 0;
-  background: var(--color-cream);
-  color: var(--color-plum);
+  background-color: #0f0d0a;
+  background-image:
+    linear-gradient(rgba(10, 8, 6, 0.45), rgba(10, 8, 6, 0.6)), url('/background/background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  color: var(--color-ink);
   font-family: var(--font-sans);
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 4.5s ease-in-out infinite;
+}
+
+@keyframes rise-fade {
+  0% {
+    transform: translateY(0) scale(0.7);
+    opacity: 0;
+  }
+  25% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(-52px) scale(1);
+    opacity: 0;
+  }
+}
+
+.bubble {
+  position: absolute;
+  bottom: 8%;
+  width: 7px;
+  height: 7px;
+  border-radius: 9999px;
+  background: currentColor;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.group:hover .bubble {
+  animation: rise-fade 1.6s ease-in-out infinite;
 }

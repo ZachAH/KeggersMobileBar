@@ -1,0 +1,14 @@
+// Deploy with: firebase deploy --only storage
+// (or paste into Firebase Console → Storage → Rules)
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /locations/{allPaths=**} {
+      // Anyone can view location photos (public "Where We'll Be" page).
+      allow read: if true;
+      // Only signed-in users (mom's admin account) can upload/remove photos.
+      allow write: if request.auth != null;
+    }
+  }
+}

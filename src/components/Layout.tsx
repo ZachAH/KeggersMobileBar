@@ -1,21 +1,30 @@
 import { NavLink, Outlet } from 'react-router-dom'
 
 const navLinkClass = ({ isActive }: { isActive: boolean }) =>
-  `hover:text-berry ${isActive ? 'text-berry font-semibold' : 'text-plum'}`
+  `text-sm font-medium tracking-wide uppercase transition-colors hover:text-gold ${
+    isActive ? 'text-gold' : 'text-cream/80'
+  }`
 
 export function Layout() {
   return (
     <div className="flex min-h-screen flex-col">
-      <header className="flex items-center justify-between px-6 py-4">
-        <NavLink to="/" className="text-xl font-display font-semibold">
-          Keggers Mocktails
+      <header className="flex flex-wrap items-center justify-between gap-4 border-b border-cream/15 px-6 py-4">
+        <NavLink to="/" className="shrink-0">
+          <img
+            src="/logo-header-gold.png"
+            alt="Keggers Mobile Bar"
+            className="h-16 w-auto transition-transform duration-300 ease-out hover:-rotate-3 hover:scale-110"
+          />
         </NavLink>
-        <nav className="flex gap-6">
+        <nav className="flex flex-wrap gap-x-6 gap-y-2">
           <NavLink to="/" end className={navLinkClass}>
             Home
           </NavLink>
           <NavLink to="/menu" className={navLinkClass}>
             Menu
+          </NavLink>
+          <NavLink to="/gallery" className={navLinkClass}>
+            Gallery
           </NavLink>
           <NavLink to="/where-well-be" className={navLinkClass}>
             Where We'll Be
@@ -25,11 +34,11 @@ export function Layout() {
           </NavLink>
         </nav>
       </header>
-      <main className="flex-1 px-6 py-8">
+      <main className="flex-1 px-6 py-12">
         <Outlet />
       </main>
-      <footer className="px-6 py-4 text-center text-sm text-plum/60">
-        © {new Date().getFullYear()} Keggers Mocktails
+      <footer className="border-t border-cream/15 px-6 py-6 text-center text-sm text-cream/60">
+        © {new Date().getFullYear()} Keggers Mobile Bar — craft mocktails, mobile bar service
       </footer>
     </div>
   )
