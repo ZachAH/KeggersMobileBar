@@ -1,10 +1,12 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { GoldSilkBackground } from './components/GoldSilkBackground'
 import { Layout } from './components/Layout'
 import { ProtectedRoute } from './components/ProtectedRoute'
 import { About } from './pages/About'
 import { Dashboard } from './pages/admin/Dashboard'
 import { Login } from './pages/admin/Login'
+import { Contact } from './pages/Contact'
 import { Gallery } from './pages/Gallery'
 import { Home } from './pages/Home'
 import { Menu } from './pages/Menu'
@@ -22,6 +24,7 @@ const queryClient = new QueryClient({
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
+      <GoldSilkBackground />
       <BrowserRouter>
         <Routes>
           <Route element={<Layout />}>
@@ -30,6 +33,7 @@ export default function App() {
             <Route path="gallery" element={<Gallery />} />
             <Route path="where-well-be" element={<WhereWellBe />} />
             <Route path="about" element={<About />} />
+            <Route path="contact" element={<Contact />} />
             <Route path="admin/login" element={<Login />} />
             <Route element={<ProtectedRoute />}>
               <Route path="admin" element={<Dashboard />} />

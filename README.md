@@ -19,12 +19,18 @@ admin login so it can be updated without touching code.
    values into `.env` (copy `.env.example` to `.env` first).
 4. Enable **Authentication → Sign-in method → Email/Password**, then add one user under
    **Authentication → Users** (the admin/mom login).
-5. Enable **Firestore Database**, then publish the rules in
-   [`firebase/firestore.rules`](firebase/firestore.rules) (paste into the Rules tab, or deploy
-   with the Firebase CLI: `firebase deploy --only firestore:rules`).
-6. Enable **Storage**, then publish the rules in [`firebase/storage.rules`](firebase/storage.rules)
-   the same way (used for the optional photo on each "Where We'll Be" stop).
+5. Enable **Firestore Database** and **Storage** in the console (just click "Get started" on each
+   — no config needed there).
+6. Publish the security rules with the Firebase CLI (already configured via `firebase.json` /
+   `.firebaserc` in this repo):
+   ```bash
+   firebase login          # one-time, opens a browser to sign in
+   firebase deploy --only firestore:rules,storage:rules
+   ```
+   Re-run the `deploy` command any time [`firebase/firestore.rules`](firebase/firestore.rules) or
+   [`firebase/storage.rules`](firebase/storage.rules) changes — the rules only take effect once
+   published.
 7. `npm run dev`
 
-The admin dashboard for managing upcoming stops lives at `/admin` (redirects to `/admin/login`
-if not signed in).
+The admin dashboard lives at `/admin` (redirects to `/admin/login` if not signed in) — manage
+upcoming "Where We'll Be" stops and view contact-form inquiries there.

@@ -17,21 +17,17 @@
   --color-red: #6e1423;
 }
 
-html,
+html {
+  background-color: #070707;
+}
+
 body,
 #root {
-  height: 100%;
+  min-height: 100%;
 }
 
 body {
   margin: 0;
-  background-color: #0f0d0a;
-  background-image:
-    linear-gradient(rgba(10, 8, 6, 0.45), rgba(10, 8, 6, 0.6)), url('/background/background.jpg');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
   color: var(--color-ink);
   font-family: var(--font-sans);
 }

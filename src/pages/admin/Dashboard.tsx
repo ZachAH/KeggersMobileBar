@@ -1,6 +1,7 @@
 import { signOut } from 'firebase/auth'
 import { type FormEvent, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useDeleteInquiry, useInquiries } from '../../hooks/useInquiries'
 import { useCreateLocation, useDeleteLocation, useLocations } from '../../hooks/useLocations'
 import { auth } from '../../lib/firebase'
 
@@ -20,6 +21,8 @@ export function Dashboard() {
   const { data: locations, isLoading } = useLocations()
   const createLocation = useCreateLocation()
   const deleteLocation = useDeleteLocation()
+  const { data: inquiries, isLoading: inquiriesLoading } = useInquiries()
+  const deleteInquiry = useDeleteInquiry()
   const [form, setForm] = useState(emptyForm)
   const [imageFile, setImageFile] = useState<File | null>(null)
   const [imagePreview, setImagePreview] = useState<string | null>(null)
@@ -174,6 +177,57 @@ export function Dashboard() {
               >
                 Remove
               </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="mt-8">
+        <h2 className="font-semibold text-gold">Recent Inquiries</h2>
+        {inquiriesLoading && <p className="mt-2 text-cream/80">Loading…</p>}
+        {inquiries && inquiries.length === 0 && (
+          <p className="mt-2 text-sm text-cream/65">No inquiries yet.</p>
+        )}
+        <ul className="mt-2 space-y-3">
+          {inquiries?.map((inquiry) => (
+            <li
+              key={inquiry.id}
+              className="rounded-lg border border-gold/20 bg-black/35 p-4 backdrop-blur-md"
+            >
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <p className="font-semibold text-cream">{inquiry.name}</p>
+                  <p className="text-sm text-cream/65">
+                    {inquiry.event_type}
+                    {inquiry.event_date && ` · ${inquiry.event_date}`}
+                  </p>
+                </div>
+                <button
+                  onClick={() => deleteInquiry.mutate(inquiry.id)}
+                  className="shrink-0 text-sm text-gold underline"
+                >
+                  Remove
+                </button>
+              </div>
+              <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm">
+                <a href={`mailto:${inquiry.email}`} className="text-gold underline">
+                  {inquiry.email}
+                </a>
+                {inquiry.phone && (
+                  <a href={`tel:${inquiry.phone}`} className="text-gold underline">
+                    {inquiry.phone}
+                  </a>
+                )}
+              </div>
+              {inquiry.message && (
+                <p className="mt-2 text-sm whitespace-pre-wrap text-cream/80">{inquiry.message}</p>
+              )}
+              <p className="mt-2 text-xs text-cream/50">
+                Submitted {new Date(inquiry.created_at).toLocaleString(undefined, {
+                  dateStyle: 'medium',
+                  timeStyle: 'short',
+                })}
+              </p>
             </li>
           ))}
         </ul>

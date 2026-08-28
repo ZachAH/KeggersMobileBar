@@ -32,6 +32,9 @@ export function Layout() {
           <NavLink to="/about" className={navLinkClass}>
             About
           </NavLink>
+          <NavLink to="/contact" className={navLinkClass}>
+            Contact
+          </NavLink>
         </nav>
       </header>
       <main className="flex-1 px-6 py-12">

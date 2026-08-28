@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Bubbles } from '../components/Bubbles'
+import { Testimonials } from '../components/Testimonials'
 import { seasonalMocktails } from '../data/menu'
 import { useLocations } from '../hooks/useLocations'
 
@@ -43,12 +44,12 @@ export function Home() {
             >
               View the Menu
             </Link>
-            <button
-              type="button"
+            <Link
+              to="/contact"
               className="rounded-full bg-gold px-10 py-4 text-base font-bold tracking-wide text-plum uppercase shadow-md transition-all hover:scale-105 hover:bg-cream"
             >
               Inquire Now
-            </button>
+            </Link>
             <Link
               to="/where-well-be"
               className="rounded-full border border-cream/60 px-6 py-3 text-sm font-semibold tracking-wide text-cream uppercase transition-colors hover:bg-gold hover:text-plum"
@@ -94,6 +95,8 @@ export function Home() {
           ))}
         </div>
       </div>
+
+      <Testimonials />
 
       {upcoming && upcoming.length > 0 && (
         <div>
