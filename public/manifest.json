@@ -1,0 +1,14 @@
+{
+  "name": "Keggers Mobile Bar Admin",
+  "short_name": "Keggers Admin",
+  "description": "Manage Keggers Mobile Bar's schedule, menu, and inquiries.",
+  "start_url": "/admin",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#070707",
+  "theme_color": "#0f0d0a",
+  "icons": [
+    { "src": "/favicon-180.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "/favicon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

@@ -8,7 +8,8 @@ admin login so it can be updated without touching code.
 - Vite + React + TypeScript
 - React Router
 - Tailwind CSS
-- Firebase (Auth + Firestore for the "Where We'll Be" schedule, Storage for stop photos)
+- Firebase (Auth + Firestore for the "Where We'll Be" schedule and menu, Storage for photos,
+  Cloud Functions + Cloud Messaging for inquiry push notifications)
 - TanStack Query
 
 ## Setup
@@ -33,4 +34,29 @@ admin login so it can be updated without touching code.
 7. `npm run dev`
 
 The admin dashboard lives at `/admin` (redirects to `/admin/login` if not signed in) — manage
-upcoming "Where We'll Be" stops and view contact-form inquiries there.
+upcoming "Where We'll Be" stops, the menu, and contact-form inquiries there.
+
+## Push notifications for new inquiries
+
+Requires the **Blaze (pay-as-you-go)** plan — Cloud Functions don't run on the free Spark plan.
+Realistically $0/month at this project's scale, but it does need a card on file
+(Project settings → Usage and billing).
+
+1. In the Firebase Console: **Project settings → Cloud Messaging** tab → under "Web
+   configuration", click **Generate key pair**. Copy the resulting key.
+2. Add it to `.env`: `VITE_FIREBASE_VAPID_KEY=<the key you copied>`.
+3. Publish the updated Firestore rules (adds the `fcm_tokens` collection):
+   ```bash
+   firebase deploy --only firestore:rules
+   ```
+4. Install and deploy the Cloud Function:
+   ```bash
+   cd functions && npm install && cd ..
+   firebase deploy --only functions
+   ```
+5. `npm run dev`, sign into `/admin`, and click **Enable** under "Push Notifications". On iPhone,
+   Safari only supports push for sites added to the Home Screen — tap Share → Add to Home Screen
+   first, then open it from there and enable notifications.
+
+Once set up, every new contact-form submission triggers a push to every device that's enabled
+notifications, deep-linking back to `/admin`.

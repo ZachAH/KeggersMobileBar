@@ -1,6 +1,8 @@
 import { signOut } from 'firebase/auth'
 import { type FormEvent, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { MenuManager } from '../../components/admin/MenuManager'
+import { NotificationSettings } from '../../components/admin/NotificationSettings'
 import { useDeleteInquiry, useInquiries } from '../../hooks/useInquiries'
 import { useCreateLocation, useDeleteLocation, useLocations } from '../../hooks/useLocations'
 import { auth } from '../../lib/firebase'
@@ -82,6 +84,8 @@ export function Dashboard() {
           Sign out
         </button>
       </div>
+
+      <NotificationSettings />
 
       <form
         onSubmit={handleSubmit}
@@ -191,6 +195,8 @@ export function Dashboard() {
           ))}
         </ul>
       </div>
+
+      <MenuManager />
 
       <div className="mt-8">
         <h2 className="font-semibold text-gold">Recent Inquiries</h2>

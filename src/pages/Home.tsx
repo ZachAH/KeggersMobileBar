@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom'
 import { Bubbles } from '../components/Bubbles'
 import { Testimonials } from '../components/Testimonials'
-import { seasonalMocktails } from '../data/menu'
 import { useLocations } from '../hooks/useLocations'
+import { useMenuItems } from '../hooks/useMenuItems'
 
 const galleryPreview = [
   {
@@ -17,6 +17,8 @@ const galleryPreview = [
 export function Home() {
   const { data: locations } = useLocations()
   const upcoming = locations?.slice(0, 2)
+  const { data: menuItems } = useMenuItems()
+  const featuredDrinks = menuItems?.filter((item) => item.favorite).slice(0, 3)
 
   return (
     <div className="mx-auto flex max-w-5xl flex-col gap-20">
@@ -79,25 +81,30 @@ export function Home() {
             <Bubbles />
           </div>
         </div>
-        <div className="mt-8 grid gap-6 sm:grid-cols-3">
-          {seasonalMocktails.map((item) => (
-            <div
-              key={item.name}
-              className={`group relative overflow-hidden rounded-lg border border-gold/20 bg-black/35 text-left backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-gold/40 hover:shadow-lg ${item.color.replace('bg-', 'text-')}`}
-            >
-              <div className="p-5">
-                <p className="text-lg font-semibold text-cream">{item.name}</p>
-                <ul className="mt-2 space-y-0.5 text-sm text-cream/65">
-                  {item.ingredients.map((ingredient) => (
-                    <li key={ingredient}>{ingredient}</li>
-                  ))}
-                </ul>
+        {featuredDrinks && featuredDrinks.length > 0 && (
+          <div className="mt-8 grid gap-6 sm:grid-cols-3">
+            {featuredDrinks.map((item) => (
+              <div
+                key={item.id}
+                className={`group relative overflow-hidden rounded-lg border border-gold/20 bg-black/35 text-left backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-gold/40 hover:shadow-lg ${item.color.replace('bg-', 'text-')}`}
+              >
+                {item.image_url && (
+                  <img src={item.image_url} alt={item.name} className="h-40 w-full object-cover" />
+                )}
+                <div className="p-5">
+                  <p className="text-lg font-semibold text-cream">{item.name}</p>
+                  <ul className="mt-2 space-y-0.5 text-sm text-cream/65">
+                    {item.ingredients.map((ingredient) => (
+                      <li key={ingredient}>{ingredient}</li>
+                    ))}
+                  </ul>
+                </div>
+                <span className={`block h-2 w-full ${item.color}`} />
+                <Bubbles />
               </div>
-              <span className={`block h-2 w-full ${item.color}`} />
-              <Bubbles />
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
 
       <Testimonials />

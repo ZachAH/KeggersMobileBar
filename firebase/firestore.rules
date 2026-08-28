@@ -18,5 +18,20 @@ service cloud.firestore {
       // submissions — this keeps other people's contact info private.
       allow read, update, delete: if request.auth != null;
     }
+
+    match /menu_items/{itemId} {
+      // Anyone can read the menu (public Menu page + landing page favorites).
+      allow read: if true;
+      // Only signed-in users (mom's admin account) can add/edit/remove drinks.
+      allow write: if request.auth != null;
+    }
+
+    match /fcm_tokens/{token} {
+      // Push notification device tokens — never publicly readable. Only a
+      // signed-in user can register their own device (the Cloud Function
+      // that sends notifications uses the Admin SDK, which bypasses these
+      // rules entirely).
+      allow read, write: if request.auth != null;
+    }
   }
 }

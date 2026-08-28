@@ -1,34 +1,10 @@
-export interface MenuItem {
-  name: string
-  ingredients: string[]
-  color: string
-}
-
-export const seasonalMocktails: MenuItem[] = [
-  {
-    name: 'Marigold Mule',
-    ingredients: ['Marigold tea syrup', 'Orange juice', 'Ginger beer (non-alcoholic)'],
-    color: 'bg-gold',
-  },
-  {
-    name: 'Ginger Berry Fizz',
-    ingredients: [
-      'Blueberry syrup',
-      'Lemon juice',
-      'Pineapple juice',
-      'Ginger beer (non-alcoholic)',
-    ],
-    color: 'bg-teal',
-  },
-  {
-    name: 'Berry In Love',
-    ingredients: [
-      'Muddled mint leaves',
-      'Strawberry syrup',
-      'Rose water',
-      'Lemon juice',
-      'Ginger ale',
-    ],
-    color: 'bg-red',
-  },
+// The accent colors available for menu items — matches the site's jewel-tone
+// palette. Used for the admin color picker and the drink cards' bottom bar.
+export const menuColors = [
+  { label: 'Gold', value: 'bg-gold' },
+  { label: 'Emerald', value: 'bg-teal' },
+  { label: 'Burgundy', value: 'bg-red' },
+  { label: 'Aubergine', value: 'bg-purple' },
+  { label: 'Copper', value: 'bg-orange' },
+  { label: 'Antique Gold', value: 'bg-pink' },
 ]
