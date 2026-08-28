@@ -20,6 +20,9 @@ export function Layout() {
           <NavLink to="/" end className={navLinkClass}>
             Home
           </NavLink>
+          <NavLink to="/what-we-offer" className={navLinkClass}>
+            What We Offer
+          </NavLink>
           <NavLink to="/menu" className={navLinkClass}>
             Menu
           </NavLink>
@@ -41,7 +44,8 @@ export function Layout() {
         <Outlet />
       </main>
       <footer className="border-t border-cream/15 px-6 py-6 text-center text-sm text-cream/60">
-        © {new Date().getFullYear()} Keggers Mobile Bar — craft mocktails, mobile bar service
+        © {new Date().getFullYear()} Keggers Mobile Bar — mocktails, cocktails &amp; full bar
+        service
       </footer>
     </div>
   )

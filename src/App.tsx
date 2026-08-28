@@ -10,6 +10,7 @@ import { Contact } from './pages/Contact'
 import { Gallery } from './pages/Gallery'
 import { Home } from './pages/Home'
 import { Menu } from './pages/Menu'
+import { WhatWeOffer } from './pages/WhatWeOffer'
 import { WhereWellBe } from './pages/WhereWellBe'
 
 const queryClient = new QueryClient({
@@ -29,6 +30,7 @@ export default function App() {
         <Routes>
           <Route element={<Layout />}>
             <Route index element={<Home />} />
+            <Route path="what-we-offer" element={<WhatWeOffer />} />
             <Route path="menu" element={<Menu />} />
             <Route path="gallery" element={<Gallery />} />
             <Route path="where-well-be" element={<WhereWellBe />} />

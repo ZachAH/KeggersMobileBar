@@ -23,19 +23,23 @@ export function Home() {
       <div className="mx-auto flex max-w-3xl flex-col items-center gap-12 text-center">
         <div>
           <h1 className="sr-only">
-            Keggers Mobile Bar — Craft Mocktails &amp; Mobile Bar Service
+            Keggers Mobile Bar — Mocktails, Cocktails &amp; Full Bar Service
           </h1>
           <p className="text-sm font-semibold tracking-[0.3em] text-gold uppercase">
-            Craft Mocktails &middot; Corporate &amp; Private Events
+            Crafted Mocktails &middot; Signature Cocktails &middot; Beer &amp; Wine Service
           </p>
           <img
             src="/logo-header-gold.png"
             alt="Keggers Mobile Bar"
             className="animate-float mx-auto mt-4 h-64 w-auto sm:h-80"
           />
-          <p className="font-serif mx-auto mt-6 max-w-xl text-xl text-cream/90 italic">
-            An elegant, alcohol-free mobile bar for occasions of every scale — corporate galas
-            and arena-sized outings, weddings and private affairs, and the local farmers market.
+          <p className="font-serif mx-auto mt-4 max-w-xl text-2xl text-gold italic">
+            More than a bar. It's an experience.
+          </p>
+          <p className="font-serif mx-auto mt-4 max-w-xl text-xl text-cream/90 italic">
+            Elevated mobile bar experiences for weddings, private parties, corporate events, and
+            charitable events throughout Wisconsin — mocktails are our specialty, and we pour
+            cocktails and beer &amp; wine too.
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
             <Link
@@ -62,8 +66,8 @@ export function Home() {
 
       <div className="text-center">
         <p className="font-serif text-3xl tracking-tight italic sm:text-4xl">
-          <span className="text-cream">Seasonal.</span> <span className="text-gold">Refined.</span>{' '}
-          <span className="text-cream">Always</span> <span className="text-gold">Zero-Proof.</span>
+          <span className="text-cream">Seasonal.</span> <span className="text-gold">Handcrafted.</span>{' '}
+          <span className="text-cream">Mocktails.</span>
         </p>
         <div className="group relative mx-auto mt-8 max-w-2xl">
           <img

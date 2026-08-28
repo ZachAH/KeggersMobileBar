@@ -7,18 +7,8 @@ const emptyForm: NewInquiry = {
   name: '',
   email: '',
   phone: '',
-  event_type: 'Corporate Event',
-  event_date: '',
   message: '',
 }
-
-const eventTypes = [
-  'Corporate Event',
-  'Wedding',
-  'Private Party',
-  'Festival / Farmers Market',
-  'Other',
-]
 
 export function Contact() {
   const createInquiry = useCreateInquiry()
@@ -86,25 +76,6 @@ export function Contact() {
             onChange={(e) => setForm({ ...form, phone: e.target.value })}
             className="rounded border border-ink/20 bg-cream px-3 py-2 text-ink"
           />
-          <div className="flex gap-3">
-            <select
-              value={form.event_type}
-              onChange={(e) => setForm({ ...form, event_type: e.target.value })}
-              className="flex-1 rounded border border-ink/20 bg-cream px-3 py-2 text-ink"
-            >
-              {eventTypes.map((type) => (
-                <option key={type} value={type}>
-                  {type}
-                </option>
-              ))}
-            </select>
-            <input
-              type="date"
-              value={form.event_date}
-              onChange={(e) => setForm({ ...form, event_date: e.target.value })}
-              className="flex-1 rounded border border-ink/20 bg-cream px-3 py-2 text-ink"
-            />
-          </div>
           <textarea
             placeholder="Tell us about your event — headcount, location, vision..."
             value={form.message}

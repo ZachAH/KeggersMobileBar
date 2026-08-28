@@ -4,6 +4,16 @@ import { useNavigate } from 'react-router-dom'
 import { useDeleteInquiry, useInquiries } from '../../hooks/useInquiries'
 import { useCreateLocation, useDeleteLocation, useLocations } from '../../hooks/useLocations'
 import { auth } from '../../lib/firebase'
+import type { Inquiry } from '../../types/inquiry'
+
+function buildReplyMailto(inquiry: Inquiry) {
+  const subject = 'Re: Your Inquiry — Keggers Mobile Bar'
+  const body = `Hi ${inquiry.name},\n\nThanks so much for reaching out to Keggers Mobile Bar!\n\n`
+  return `mailto:${inquiry.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+}
+
+const actionButtonClass =
+  'rounded-full border border-gold/40 px-4 py-1.5 text-xs font-semibold tracking-wide text-gold uppercase transition-colors hover:bg-gold hover:text-plum'
 
 const emptyForm = {
   venue_name: '',
@@ -198,8 +208,8 @@ export function Dashboard() {
                 <div>
                   <p className="font-semibold text-cream">{inquiry.name}</p>
                   <p className="text-sm text-cream/65">
-                    {inquiry.event_type}
-                    {inquiry.event_date && ` · ${inquiry.event_date}`}
+                    {inquiry.email}
+                    {inquiry.phone && ` · ${inquiry.phone}`}
                   </p>
                 </div>
                 <button
@@ -209,20 +219,20 @@ export function Dashboard() {
                   Remove
                 </button>
               </div>
-              <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm">
-                <a href={`mailto:${inquiry.email}`} className="text-gold underline">
-                  {inquiry.email}
-                </a>
-                {inquiry.phone && (
-                  <a href={`tel:${inquiry.phone}`} className="text-gold underline">
-                    {inquiry.phone}
-                  </a>
-                )}
-              </div>
               {inquiry.message && (
                 <p className="mt-2 text-sm whitespace-pre-wrap text-cream/80">{inquiry.message}</p>
               )}
-              <p className="mt-2 text-xs text-cream/50">
+              <div className="mt-3 flex flex-wrap gap-2">
+                <a href={buildReplyMailto(inquiry)} className={actionButtonClass}>
+                  Reply by Email
+                </a>
+                {inquiry.phone && (
+                  <a href={`tel:${inquiry.phone}`} className={actionButtonClass}>
+                    Call {inquiry.phone}
+                  </a>
+                )}
+              </div>
+              <p className="mt-3 text-xs text-cream/50">
                 Submitted {new Date(inquiry.created_at).toLocaleString(undefined, {
                   dateStyle: 'medium',
                   timeStyle: 'short',

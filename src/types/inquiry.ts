@@ -2,8 +2,6 @@ export interface NewInquiry {
   name: string
   email: string
   phone: string
-  event_type: string
-  event_date: string
   message: string
 }
 
