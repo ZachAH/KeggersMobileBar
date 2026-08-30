@@ -20,7 +20,7 @@ export function Home() {
       <div className="relative h-[70vh] min-h-[520px] w-full overflow-hidden sm:min-h-[640px]">
         <video
           className="absolute inset-0 h-full w-full object-cover"
-          src="/video/hero.mp4"
+          src="/video/hero.webm"
           autoPlay
           loop
           muted
