@@ -63,13 +63,6 @@ export function Home() {
         </div>
       </div>
 
-      <div className="text-center">
-        <p className="font-serif text-3xl tracking-tight italic sm:text-4xl">
-          <span className="text-cream">Seasonal.</span> <span className="text-gold">Handcrafted.</span>{' '}
-          <span className="text-cream">Mocktails.</span>
-        </p>
-      </div>
-
       <Testimonials />
 
       {upcoming && upcoming.length > 0 && (
