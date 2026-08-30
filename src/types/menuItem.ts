@@ -1,9 +1,11 @@
+export type MenuCategory = 'mocktail' | 'wellness-tea'
+
 export interface MenuItem {
   id: string
   name: string
-  ingredients: string[]
+  description: string
+  category: MenuCategory
   color: string
-  favorite: boolean
   image_url: string | null
   image_path: string | null
   created_at: string

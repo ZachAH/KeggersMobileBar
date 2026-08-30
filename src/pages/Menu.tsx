@@ -1,45 +1,99 @@
+import { Reveal } from '../components/Reveal'
 import { SectionHeading } from '../components/SectionHeading'
 import { useMenuItems } from '../hooks/useMenuItems'
+import type { MenuItem } from '../types/menuItem'
+
+function DrinkShowcase({ items, emptyMessage }: { items: MenuItem[]; emptyMessage: string }) {
+  if (items.length === 0) {
+    return <p className="mt-10 text-center text-noir/60">{emptyMessage}</p>
+  }
+
+  return (
+    <div className="mt-10 flex flex-col gap-16 sm:gap-24">
+      {items.map((item, i) => (
+        <div key={item.id}>
+          {i > 0 && (
+            <div className="mx-auto mb-16 flex items-center justify-center gap-3 sm:mb-24">
+              <span className="h-px w-16 bg-noir/10" />
+              <span className="h-2 w-2 rounded-full bg-crimson" aria-hidden="true" />
+              <span className="h-px w-16 bg-noir/10" />
+            </div>
+          )}
+          <Reveal>
+            <div className="grid items-center gap-10 sm:grid-cols-2 sm:gap-16">
+              <div className={item.image_url ? (i % 2 === 1 ? 'sm:order-2' : '') : 'hidden'}>
+                {item.image_url && (
+                  <img
+                    src={item.image_url}
+                    alt={item.name}
+                    className="mx-auto h-auto w-full max-w-sm object-contain drop-shadow-2xl sm:max-w-md"
+                  />
+                )}
+              </div>
+              <div
+                className={`text-center sm:text-left ${
+                  item.image_url ? (i % 2 === 1 ? 'sm:order-1' : '') : 'sm:col-span-2 sm:text-center'
+                }`}
+              >
+                <h3 className="font-serif text-4xl font-semibold text-noir sm:text-5xl">
+                  {item.name}
+                </h3>
+                <p className="font-serif mt-6 text-xl leading-relaxed text-noir/75 italic">
+                  {item.description}
+                </p>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      ))}
+    </div>
+  )
+}
 
 export function Menu() {
   const { data: items, isLoading, error } = useMenuItems()
+  const mocktails = items?.filter((item) => item.category === 'mocktail') ?? []
+  const wellnessTeas = items?.filter((item) => item.category === 'wellness-tea') ?? []
 
   return (
-    <div className="mx-auto max-w-4xl">
+    <div className="mx-auto max-w-5xl">
       <SectionHeading>Seasonal Menu</SectionHeading>
       <p className="font-serif mt-4 text-center text-lg text-noir/70 italic">
-        This season's curated lineup — with more arriving soon.
+        This season's curated lineup — a handful of signature drinks, crafted with care.
       </p>
 
       {isLoading && <p className="mt-10 text-center text-noir/70">Loading…</p>}
       {error && <p className="mt-10 text-center text-crimson">Couldn't load the menu right now.</p>}
-      {items && items.length === 0 && (
-        <p className="mt-10 text-center text-noir/70">
-          Our menu is being freshened up — check back soon!
-        </p>
-      )}
 
-      <div className="mt-10 grid gap-6 sm:grid-cols-2">
-        {items?.map((item) => (
-          <div
-            key={item.id}
-            className="group relative overflow-hidden rounded-lg border border-noir/10 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
-          >
-            {item.image_url && (
-              <img src={item.image_url} alt={item.name} className="h-40 w-full object-cover" />
-            )}
-            <div className="p-5">
-              <p className="text-lg font-semibold text-noir">{item.name}</p>
-              <ul className="mt-2 space-y-0.5 text-sm text-noir/60">
-                {item.ingredients.map((ingredient) => (
-                  <li key={ingredient}>{ingredient}</li>
-                ))}
-              </ul>
-            </div>
-            <span className="block h-1.5 w-full bg-crimson" />
+      {items && (
+        <>
+          <div className="mt-20">
+            <p className="text-xs font-semibold tracking-[0.3em] text-crimson uppercase">
+              Sip &amp; Savor
+            </p>
+            <h2 className="font-serif mt-2 text-3xl font-semibold text-noir sm:text-4xl">
+              Seasonal Mocktails
+            </h2>
+            <DrinkShowcase items={mocktails} emptyMessage="New mocktails coming soon." />
           </div>
-        ))}
-      </div>
+
+          <div className="mx-auto my-20 flex items-center justify-center gap-3 sm:my-28">
+            <span className="h-px w-24 bg-noir/10" />
+            <span className="h-2.5 w-2.5 rounded-full bg-crimson" aria-hidden="true" />
+            <span className="h-px w-24 bg-noir/10" />
+          </div>
+
+          <div className="pb-20 sm:pb-28">
+            <p className="text-xs font-semibold tracking-[0.3em] text-crimson uppercase">
+              Sip &amp; Restore
+            </p>
+            <h2 className="font-serif mt-2 text-3xl font-semibold text-noir sm:text-4xl">
+              Seasonal Wellness Teas
+            </h2>
+            <DrinkShowcase items={wellnessTeas} emptyMessage="New wellness teas coming soon." />
+          </div>
+        </>
+      )}
     </div>
   )
 }

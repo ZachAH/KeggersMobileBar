@@ -8,3 +8,8 @@ export const menuColors = [
   { label: 'Copper', value: 'bg-orange' },
   { label: 'Antique Gold', value: 'bg-pink' },
 ]
+
+export const menuCategories = [
+  { label: 'Seasonal Mocktail', value: 'mocktail' },
+  { label: 'Seasonal Wellness Tea', value: 'wellness-tea' },
+] as const

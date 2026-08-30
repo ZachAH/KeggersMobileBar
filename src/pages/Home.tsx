@@ -1,11 +1,13 @@
 import { Link } from 'react-router-dom'
+import { Reveal } from '../components/Reveal'
 import { Testimonials } from '../components/Testimonials'
+import { TickerStrip } from '../components/TickerStrip'
 import { useLocations } from '../hooks/useLocations'
 
 const galleryPreview = [
   { src: '/preview/charitable-event.jpg', label: 'Community & Charity Events' },
-  { src: '/preview/fresh-pour.jpeg', label: 'Fresh Pour' },
-  { src: '/preview/owner.jpg', label: 'Meet the Owner' },
+  { src: '/preview/farmers-market-setup.jpeg', label: 'Farmers Market' },
+  { src: '/preview/owner.jpg', label: 'Art Musuem' },
 ]
 
 export function Home() {
@@ -42,13 +44,17 @@ export function Home() {
         </div>
       </div>
 
+      <TickerStrip />
+
       <div className="mx-auto grid max-w-5xl gap-10 px-6 py-20 sm:grid-cols-2 sm:items-center sm:gap-16 sm:py-28">
-        <img
-          src="/gallery/mobile-bar-trailer.jpeg"
-          alt="The Keggers Mobile Bar trailer set up at an event"
-          className="w-full rounded-2xl object-cover shadow-xl"
-        />
-        <div>
+        <Reveal>
+          <img
+            src="/gallery/mobile-bar-trailer.jpeg"
+            alt="The Keggers Mobile Bar trailer set up at an event"
+            className="w-full rounded-2xl object-cover shadow-xl"
+          />
+        </Reveal>
+        <Reveal delay={150}>
           <span className="inline-block border-2 border-crimson px-6 py-5 sm:px-8 sm:py-6">
             <h2 className="font-serif text-3xl leading-tight font-semibold sm:text-4xl">
               The Centerpiece of Every Celebration
@@ -73,65 +79,73 @@ export function Home() {
               Find Us
             </Link>
           </div>
-        </div>
+        </Reveal>
       </div>
 
       <div className="bg-noir px-6 py-20 text-white sm:py-28">
-        <Testimonials />
+        <Reveal>
+          <Testimonials />
+        </Reveal>
       </div>
 
       {upcoming && upcoming.length > 0 && (
         <div className="mx-auto max-w-5xl px-6 py-20 sm:py-28">
-          <h2 className="font-serif text-center text-4xl font-semibold">Upcoming Engagements</h2>
-          <div className="mt-10 grid gap-6 sm:grid-cols-2">
-            {upcoming.map((loc) => (
-              <div key={loc.id} className="flex items-start gap-4 border border-noir/10 p-6 shadow-sm">
-                {loc.image_url && (
-                  <img
-                    src={loc.image_url}
-                    alt={loc.venue_name}
-                    className="h-16 w-16 shrink-0 rounded-md object-cover"
-                  />
-                )}
-                <div>
-                  <p className="font-semibold">{loc.venue_name}</p>
-                  <p className="text-sm text-noir/60">{loc.address}</p>
-                  <p className="mt-1 text-sm text-noir/60">
-                    {new Date(loc.event_date).toLocaleDateString(undefined, {
-                      weekday: 'long',
-                      month: 'long',
-                      day: 'numeric',
-                    })}{' '}
-                    · {loc.start_time}–{loc.end_time}
-                  </p>
+          <Reveal>
+            <h2 className="font-serif text-center text-4xl font-semibold">Upcoming Engagements</h2>
+            <div className="mt-10 grid gap-6 sm:grid-cols-2">
+              {upcoming.map((loc) => (
+                <div key={loc.id} className="flex items-start gap-4 border border-noir/10 p-6 shadow-sm">
+                  {loc.image_url && (
+                    <img
+                      src={loc.image_url}
+                      alt={loc.venue_name}
+                      className="h-16 w-16 shrink-0 rounded-md object-cover"
+                    />
+                  )}
+                  <div>
+                    <p className="font-semibold">{loc.venue_name}</p>
+                    <p className="text-sm text-noir/60">{loc.address}</p>
+                    <p className="mt-1 text-sm text-noir/60">
+                      {new Date(loc.event_date).toLocaleDateString(undefined, {
+                        weekday: 'long',
+                        month: 'long',
+                        day: 'numeric',
+                      })}{' '}
+                      · {loc.start_time}–{loc.end_time}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-          <div className="mt-8 text-center">
-            <Link to="/where-well-be" className="text-sm font-semibold text-crimson underline">
-              See the full schedule
-            </Link>
-          </div>
+              ))}
+            </div>
+            <div className="mt-8 text-center">
+              <Link to="/where-well-be" className="text-sm font-semibold text-crimson underline">
+                See the full schedule
+              </Link>
+            </div>
+          </Reveal>
         </div>
       )}
 
       <div className="px-6 pt-4 pb-20 text-center sm:pb-28">
-        <h2 className="font-serif text-4xl font-semibold">Us in Action</h2>
-        <p className="mt-2 text-sm text-noir/60">A peek behind the bar.</p>
+        <Reveal>
+          <h2 className="font-serif text-4xl font-semibold">Us in Action</h2>
+          <p className="mt-2 text-sm text-noir/60">A peek behind the bar.</p>
+        </Reveal>
         <div className="mx-auto mt-10 grid max-w-5xl gap-4 sm:grid-cols-3">
-          {galleryPreview.map((item) => (
-            <div key={item.label} className="group relative h-56 overflow-hidden">
-              <img
-                src={item.src}
-                alt={item.label}
-                className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-transparent" />
-              <span className="absolute right-0 bottom-3 left-0 text-center text-xs font-semibold tracking-wide text-white uppercase">
-                {item.label}
-              </span>
-            </div>
+          {galleryPreview.map((item, i) => (
+            <Reveal key={item.label} delay={i * 100}>
+              <div className="group relative h-56 overflow-hidden">
+                <img
+                  src={item.src}
+                  alt={item.label}
+                  className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-transparent" />
+                <span className="absolute right-0 bottom-3 left-0 text-center text-xs font-semibold tracking-wide text-white uppercase">
+                  {item.label}
+                </span>
+              </div>
+            </Reveal>
           ))}
         </div>
         <Link to="/gallery" className="mt-8 inline-block text-sm font-semibold text-crimson underline">

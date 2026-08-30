@@ -1,23 +1,26 @@
 import { type FormEvent, useRef, useState } from 'react'
-import { menuColors } from '../../data/menu'
+import { menuCategories, menuColors } from '../../data/menu'
 import {
   useCreateMenuItem,
   useDeleteMenuItem,
   useMenuItems,
-  useToggleFavorite,
   useUpdateMenuItem,
 } from '../../hooks/useMenuItems'
 import type { MenuItem } from '../../types/menuItem'
 
 const MAX_IMAGE_BYTES = 5 * 1024 * 1024
-const MAX_FAVORITES = 3
 
 const inputClass = 'rounded border border-noir/20 bg-white px-3 py-2 text-noir focus:border-crimson focus:outline-none'
 
 const emptyForm = {
   name: '',
-  ingredientsText: '',
+  description: '',
+  category: menuCategories[0].value as string,
   color: menuColors[0].value,
+}
+
+function categoryLabel(value: string) {
+  return menuCategories.find((c) => c.value === value)?.label ?? value
 }
 
 export function MenuManager() {
@@ -25,7 +28,6 @@ export function MenuManager() {
   const createMenuItem = useCreateMenuItem()
   const updateMenuItem = useUpdateMenuItem()
   const deleteMenuItem = useDeleteMenuItem()
-  const toggleFavorite = useToggleFavorite()
 
   const [form, setForm] = useState(emptyForm)
   const [editingId, setEditingId] = useState<string | null>(null)
@@ -35,7 +37,6 @@ export function MenuManager() {
   const [imageFile, setImageFile] = useState<File | null>(null)
   const [imagePreview, setImagePreview] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
-  const [favoriteError, setFavoriteError] = useState<string | null>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
   const formRef = useRef<HTMLFormElement>(null)
 
@@ -54,7 +55,8 @@ export function MenuManager() {
     setEditingId(item.id)
     setForm({
       name: item.name,
-      ingredientsText: item.ingredients.join('\n'),
+      description: item.description,
+      category: item.category,
       color: item.color,
     })
     setExistingImage(item.image_url ? { url: item.image_url, path: item.image_path } : null)
@@ -84,13 +86,10 @@ export function MenuManager() {
     e.preventDefault()
     setError(null)
 
-    const ingredients = form.ingredientsText
-      .split('\n')
-      .map((line) => line.trim())
-      .filter(Boolean)
+    const description = form.description.trim()
 
-    if (ingredients.length === 0) {
-      setError('Add at least one ingredient (one per line).')
+    if (!description) {
+      setError('Add a description to sell the drink.')
       return
     }
 
@@ -99,18 +98,18 @@ export function MenuManager() {
         await updateMenuItem.mutateAsync({
           id: editingId,
           name: form.name,
-          ingredients,
+          description,
+          category: form.category as MenuItem['category'],
           color: form.color,
-          favorite: items?.find((i) => i.id === editingId)?.favorite ?? false,
           imageFile,
           existingImagePath: existingImage?.path ?? null,
         })
       } else {
         await createMenuItem.mutateAsync({
           name: form.name,
-          ingredients,
+          description,
+          category: form.category as MenuItem['category'],
           color: form.color,
-          favorite: false,
           imageFile,
         })
       }
@@ -120,27 +119,13 @@ export function MenuManager() {
     }
   }
 
-  function handleToggleFavorite(item: MenuItem) {
-    setFavoriteError(null)
-    if (!item.favorite) {
-      const currentFavorites = items?.filter((i) => i.favorite).length ?? 0
-      if (currentFavorites >= MAX_FAVORITES) {
-        setFavoriteError(
-          `Only ${MAX_FAVORITES} drinks can be featured on the landing page — unfavorite one first.`,
-        )
-        return
-      }
-    }
-    toggleFavorite.mutate({ id: item.id, favorite: !item.favorite })
-  }
-
   const previewSrc = imagePreview ?? existingImage?.url ?? null
 
   return (
     <div className="mt-8">
       <h2 className="font-semibold text-noir">Manage Menu</h2>
       <p className="mt-1 text-sm text-noir/60">
-        Star up to {MAX_FAVORITES} drinks to feature them on the landing page.
+        Choose which section — mocktails or wellness teas — each drink belongs to.
       </p>
       <p className="mt-1 text-sm text-noir/60">
         Made a typo or want to swap a photo? Click <span className="text-crimson">Edit</span> on
@@ -162,10 +147,21 @@ export function MenuManager() {
           required
           className={inputClass}
         />
+        <select
+          value={form.category}
+          onChange={(e) => setForm({ ...form, category: e.target.value })}
+          className={inputClass}
+        >
+          {menuCategories.map((c) => (
+            <option key={c.value} value={c.value}>
+              {c.label}
+            </option>
+          ))}
+        </select>
         <textarea
-          placeholder="Ingredients — one per line"
-          value={form.ingredientsText}
-          onChange={(e) => setForm({ ...form, ingredientsText: e.target.value })}
+          placeholder="Description — sell it! e.g. A bright, floral sip of butterfly pea tea swirled with pineapple and lemon, finished with a fizzy pop of sparkling water."
+          value={form.description}
+          onChange={(e) => setForm({ ...form, description: e.target.value })}
           required
           rows={4}
           className={inputClass}
@@ -181,7 +177,7 @@ export function MenuManager() {
           />
         </label>
         <p className="text-xs text-noir/50">
-          If you're uploading an image for the favorites page, please remove the background before
+          If you're uploading an image for the menu page, please remove the background before
           uploading.
         </p>
         {previewSrc && (
@@ -210,7 +206,6 @@ export function MenuManager() {
         </div>
       </form>
 
-      {favoriteError && <p className="mt-3 text-sm text-crimson">{favoriteError}</p>}
       {isLoading && <p className="mt-3 text-noir/70">Loading…</p>}
       {items && items.length === 0 && (
         <p className="mt-3 text-sm text-noir/60">No drinks on the menu yet.</p>
@@ -231,18 +226,16 @@ export function MenuManager() {
                 />
               )}
               <div>
-                <p className="font-semibold text-noir">{item.name}</p>
-                <p className="text-sm text-noir/60">{item.ingredients.join(', ')}</p>
+                <div className="flex items-center gap-2">
+                  <p className="font-semibold text-noir">{item.name}</p>
+                  <span className="rounded-full bg-crimson/10 px-2 py-0.5 text-xs font-semibold tracking-wide text-crimson uppercase">
+                    {categoryLabel(item.category)}
+                  </span>
+                </div>
+                <p className="line-clamp-2 text-sm text-noir/60">{item.description}</p>
               </div>
             </div>
             <div className="flex shrink-0 items-center gap-3">
-              <button
-                onClick={() => handleToggleFavorite(item)}
-                title={item.favorite ? 'Remove from landing page' : 'Feature on landing page'}
-                className={`text-lg ${item.favorite ? 'text-crimson' : 'text-noir/25 hover:text-noir/50'}`}
-              >
-                {item.favorite ? '★' : '☆'}
-              </button>
               <button onClick={() => startEdit(item)} className="text-sm text-crimson underline">
                 Edit
               </button>

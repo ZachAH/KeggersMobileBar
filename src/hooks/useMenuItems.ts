@@ -96,13 +96,3 @@ export function useDeleteMenuItem() {
     onSuccess: () => queryClient.invalidateQueries({ queryKey: [COLLECTION] }),
   })
 }
-
-export function useToggleFavorite() {
-  const queryClient = useQueryClient()
-  return useMutation({
-    mutationFn: async ({ id, favorite }: { id: string; favorite: boolean }) => {
-      await updateDoc(doc(db, COLLECTION, id), { favorite })
-    },
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: [COLLECTION] }),
-  })
-}

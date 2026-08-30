@@ -2,6 +2,7 @@ import { SectionHeading } from '../components/SectionHeading'
 
 const photos = [
   { src: '/gallery/mobile-bar-trailer.jpeg', label: 'The Mobile Bar', span: 'sm:row-span-2' },
+  { src: '/gallery/signature-pour.jpeg', label: 'Signature Pour', span: '' },
   { src: '/gallery/charity-event-bar-setup.jpg', label: 'Charity Event Setup', span: '' },
   { src: '/gallery/festival-booth.jpeg', label: 'Festival Booth', span: '' },
   { src: '/gallery/charity-event-crowd.jpg', label: 'Packed House', span: 'sm:row-span-2' },

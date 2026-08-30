@@ -1,8 +1,8 @@
 import { NavLink, Outlet } from 'react-router-dom'
 
 const navLinkClass = ({ isActive }: { isActive: boolean }) =>
-  `text-sm font-medium tracking-wide uppercase transition-colors hover:text-crimson ${
-    isActive ? 'text-crimson' : 'text-noir/70'
+  `nav-link text-sm font-medium tracking-wide uppercase transition-colors hover:text-crimson ${
+    isActive ? 'active-link text-crimson' : 'text-noir/70'
   }`
 
 export function Layout() {
