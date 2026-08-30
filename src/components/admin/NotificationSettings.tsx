@@ -4,11 +4,11 @@ export function NotificationSettings() {
   const { status, error, enable, disable } = usePushNotifications()
 
   return (
-    <div className="mt-6 rounded-lg border border-gold/20 bg-black/35 p-4 backdrop-blur-md">
+    <div className="mt-6 rounded-lg border border-noir/10 bg-white p-4 shadow-sm">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h2 className="font-semibold text-cream">Push Notifications</h2>
-          <p className="mt-1 text-sm text-cream/65">
+          <h2 className="font-semibold text-noir">Push Notifications</h2>
+          <p className="mt-1 text-sm text-noir/60">
             {status === 'enabled' && "You'll get a notification here whenever a new inquiry comes in."}
             {status === 'idle' && 'Get notified the moment someone submits the contact form.'}
             {status === 'denied' &&
@@ -22,7 +22,7 @@ export function NotificationSettings() {
         {(status === 'idle' || status === 'error') && (
           <button
             onClick={enable}
-            className="shrink-0 rounded-full bg-gold px-5 py-2 text-sm font-bold tracking-wide text-plum uppercase transition-colors hover:bg-cream"
+            className="shrink-0 rounded-full bg-crimson px-5 py-2 text-sm font-bold tracking-wide text-white uppercase transition-colors hover:bg-noir"
           >
             Enable
           </button>
@@ -30,7 +30,7 @@ export function NotificationSettings() {
         {status === 'enabled' && (
           <button
             onClick={disable}
-            className="shrink-0 rounded-full border border-gold/40 px-5 py-2 text-sm font-semibold tracking-wide text-gold uppercase transition-colors hover:bg-gold hover:text-plum"
+            className="shrink-0 rounded-full border border-crimson/40 px-5 py-2 text-sm font-semibold tracking-wide text-crimson uppercase transition-colors hover:bg-crimson hover:text-white"
           >
             Disable
           </button>

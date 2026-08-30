@@ -15,7 +15,9 @@ function buildReplyMailto(inquiry: Inquiry) {
 }
 
 const actionButtonClass =
-  'rounded-full border border-gold/40 px-4 py-1.5 text-xs font-semibold tracking-wide text-gold uppercase transition-colors hover:bg-gold hover:text-plum'
+  'rounded-full border border-crimson/40 px-4 py-1.5 text-xs font-semibold tracking-wide text-crimson uppercase transition-colors hover:bg-crimson hover:text-white'
+
+const inputClass = 'rounded border border-noir/20 bg-white px-3 py-2 text-noir focus:border-crimson focus:outline-none'
 
 const emptyForm = {
   venue_name: '',
@@ -79,8 +81,8 @@ export function Dashboard() {
   return (
     <div className="mx-auto max-w-2xl">
       <div className="flex items-center justify-between">
-        <h1 className="font-script text-4xl text-gold">Manage "Where We'll Be"</h1>
-        <button onClick={handleSignOut} className="text-sm text-cream/80 underline">
+        <h1 className="font-serif text-4xl font-semibold text-noir">Manage "Where We'll Be"</h1>
+        <button onClick={handleSignOut} className="text-sm text-noir/60 underline">
           Sign out
         </button>
       </div>
@@ -89,22 +91,22 @@ export function Dashboard() {
 
       <form
         onSubmit={handleSubmit}
-        className="mt-6 flex flex-col gap-3 rounded-lg border border-gold/20 bg-black/35 p-4 backdrop-blur-md"
+        className="mt-6 flex flex-col gap-3 rounded-lg border border-noir/10 bg-white p-4 shadow-sm"
       >
-        <h2 className="font-semibold text-cream">Add a stop</h2>
+        <h2 className="font-semibold text-noir">Add a stop</h2>
         <input
           placeholder="Venue name"
           value={form.venue_name}
           onChange={(e) => setForm({ ...form, venue_name: e.target.value })}
           required
-          className="rounded border border-ink/20 bg-cream px-3 py-2 text-ink"
+          className={inputClass}
         />
         <input
           placeholder="Address"
           value={form.address}
           onChange={(e) => setForm({ ...form, address: e.target.value })}
           required
-          className="rounded border border-ink/20 bg-cream px-3 py-2 text-ink"
+          className={inputClass}
         />
         <div className="flex gap-3">
           <input
@@ -112,63 +114,63 @@ export function Dashboard() {
             value={form.event_date}
             onChange={(e) => setForm({ ...form, event_date: e.target.value })}
             required
-            className="flex-1 rounded border border-ink/20 bg-cream px-3 py-2 text-ink"
+            className={`flex-1 ${inputClass}`}
           />
           <input
             type="time"
             value={form.start_time}
             onChange={(e) => setForm({ ...form, start_time: e.target.value })}
             required
-            className="flex-1 rounded border border-ink/20 bg-cream px-3 py-2 text-ink"
+            className={`flex-1 ${inputClass}`}
           />
           <input
             type="time"
             value={form.end_time}
             onChange={(e) => setForm({ ...form, end_time: e.target.value })}
             required
-            className="flex-1 rounded border border-ink/20 bg-cream px-3 py-2 text-ink"
+            className={`flex-1 ${inputClass}`}
           />
         </div>
         <textarea
           placeholder="Notes (optional)"
           value={form.notes}
           onChange={(e) => setForm({ ...form, notes: e.target.value })}
-          className="rounded border border-ink/20 bg-cream px-3 py-2 text-ink"
+          className={inputClass}
         />
 
-        <label className="text-sm font-medium text-cream">
+        <label className="text-sm font-medium text-noir">
           Photo (optional)
           <input
             ref={fileInputRef}
             type="file"
             accept="image/*"
             onChange={handleFileChange}
-            className="mt-1 block w-full text-sm text-cream/70 file:mr-3 file:rounded file:border-0 file:bg-gold file:px-3 file:py-2 file:text-sm file:font-semibold file:text-plum hover:file:bg-cream"
+            className="mt-1 block w-full text-sm text-noir/70 file:mr-3 file:rounded file:border-0 file:bg-crimson file:px-3 file:py-2 file:text-sm file:font-semibold file:text-white hover:file:bg-noir"
           />
         </label>
         {imagePreview && (
           <img src={imagePreview} alt="Selected preview" className="h-24 w-24 rounded object-cover" />
         )}
 
-        {error && <p className="text-sm text-gold">{error}</p>}
+        {error && <p className="text-sm text-crimson">{error}</p>}
 
         <button
           type="submit"
           disabled={createLocation.isPending}
-          className="self-start rounded bg-gold px-4 py-2 text-plum transition-colors hover:bg-cream disabled:opacity-50"
+          className="self-start rounded bg-crimson px-4 py-2 text-white transition-colors hover:bg-noir disabled:opacity-50"
         >
           {createLocation.isPending ? 'Adding…' : 'Add stop'}
         </button>
       </form>
 
       <div className="mt-8">
-        <h2 className="font-semibold text-gold">Upcoming stops</h2>
-        {isLoading && <p className="mt-2 text-cream/80">Loading…</p>}
+        <h2 className="font-semibold text-noir">Upcoming stops</h2>
+        {isLoading && <p className="mt-2 text-noir/70">Loading…</p>}
         <ul className="mt-2 space-y-3">
           {locations?.map((loc) => (
             <li
               key={loc.id}
-              className="flex items-start justify-between gap-4 rounded-lg border border-gold/20 bg-black/35 p-4 backdrop-blur-md"
+              className="flex items-start justify-between gap-4 rounded-lg border border-noir/10 bg-white p-4 shadow-sm"
             >
               <div className="flex items-start gap-3">
                 {loc.image_url && (
@@ -179,15 +181,15 @@ export function Dashboard() {
                   />
                 )}
                 <div>
-                  <p className="font-semibold text-cream">{loc.venue_name}</p>
-                  <p className="text-sm text-cream/65">
+                  <p className="font-semibold text-noir">{loc.venue_name}</p>
+                  <p className="text-sm text-noir/60">
                     {loc.event_date} · {loc.start_time}–{loc.end_time}
                   </p>
                 </div>
               </div>
               <button
                 onClick={() => deleteLocation.mutate(loc)}
-                className="shrink-0 text-sm text-gold underline"
+                className="shrink-0 text-sm text-crimson underline"
               >
                 Remove
               </button>
@@ -199,34 +201,31 @@ export function Dashboard() {
       <MenuManager />
 
       <div className="mt-8">
-        <h2 className="font-semibold text-gold">Recent Inquiries</h2>
-        {inquiriesLoading && <p className="mt-2 text-cream/80">Loading…</p>}
+        <h2 className="font-semibold text-noir">Recent Inquiries</h2>
+        {inquiriesLoading && <p className="mt-2 text-noir/70">Loading…</p>}
         {inquiries && inquiries.length === 0 && (
-          <p className="mt-2 text-sm text-cream/65">No inquiries yet.</p>
+          <p className="mt-2 text-sm text-noir/60">No inquiries yet.</p>
         )}
         <ul className="mt-2 space-y-3">
           {inquiries?.map((inquiry) => (
-            <li
-              key={inquiry.id}
-              className="rounded-lg border border-gold/20 bg-black/35 p-4 backdrop-blur-md"
-            >
+            <li key={inquiry.id} className="rounded-lg border border-noir/10 bg-white p-4 shadow-sm">
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <p className="font-semibold text-cream">{inquiry.name}</p>
-                  <p className="text-sm text-cream/65">
+                  <p className="font-semibold text-noir">{inquiry.name}</p>
+                  <p className="text-sm text-noir/60">
                     {inquiry.email}
                     {inquiry.phone && ` · ${inquiry.phone}`}
                   </p>
                 </div>
                 <button
                   onClick={() => deleteInquiry.mutate(inquiry.id)}
-                  className="shrink-0 text-sm text-gold underline"
+                  className="shrink-0 text-sm text-crimson underline"
                 >
                   Remove
                 </button>
               </div>
               {inquiry.message && (
-                <p className="mt-2 text-sm whitespace-pre-wrap text-cream/80">{inquiry.message}</p>
+                <p className="mt-2 text-sm whitespace-pre-wrap text-noir/75">{inquiry.message}</p>
               )}
               <div className="mt-3 flex flex-wrap gap-2">
                 <a href={buildReplyMailto(inquiry)} className={actionButtonClass}>
@@ -238,7 +237,7 @@ export function Dashboard() {
                   </a>
                 )}
               </div>
-              <p className="mt-3 text-xs text-cream/50">
+              <p className="mt-3 text-xs text-noir/40">
                 Submitted {new Date(inquiry.created_at).toLocaleString(undefined, {
                   dateStyle: 'medium',
                   timeStyle: 'short',

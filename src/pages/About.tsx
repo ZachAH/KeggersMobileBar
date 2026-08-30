@@ -4,7 +4,7 @@ export function About() {
   return (
     <div className="mx-auto max-w-2xl">
       <SectionHeading>About Kegger's Mobile Bar</SectionHeading>
-      <div className="font-serif mt-8 space-y-4 rounded-lg border border-gold/20 bg-black/35 p-6 text-lg text-cream/80 backdrop-blur-md sm:p-8">
+      <div className="font-serif mt-8 space-y-4 rounded-lg border border-noir/10 bg-white p-6 text-lg text-noir/80 shadow-sm sm:p-8">
         <p>
           What started as a dream became a reality on June 1, 2024, when I launched Kegger's
           Mobile Bar. After more than 25 years of being self-employed, I've learned that building
@@ -37,7 +37,7 @@ export function About() {
           Our philosophy is simple: Love what we do, serve it with heart, and create unforgettable
           memories for every guest we have the pleasure of serving.
         </p>
-        <p className="text-right text-base font-semibold text-gold not-italic">
+        <p className="text-right text-base font-semibold text-crimson not-italic">
           — Sandy Kagan, Owner, Kegger's Mobile Bar
         </p>
       </div>

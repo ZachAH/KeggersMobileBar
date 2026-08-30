@@ -10,6 +10,8 @@ const emptyForm: NewInquiry = {
   message: '',
 }
 
+const inputClass = 'rounded border border-noir/20 bg-white px-3 py-2 text-noir focus:border-crimson focus:outline-none'
+
 export function Contact() {
   const createInquiry = useCreateInquiry()
   const [form, setForm] = useState<NewInquiry>(emptyForm)
@@ -29,37 +31,37 @@ export function Contact() {
   return (
     <div className="mx-auto max-w-2xl">
       <SectionHeading>Get In Touch</SectionHeading>
-      <p className="font-serif mt-4 text-center text-lg text-cream/70 italic">
+      <p className="font-serif mt-4 text-center text-lg text-noir/70 italic">
         Tell us about your event, and we'll follow up to build something elegant together.
       </p>
 
       <div className="mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-center text-sm">
-        <a href="mailto:sandy@keggersmobilebar.com" className="text-gold underline">
+        <a href="mailto:sandy@keggersmobilebar.com" className="text-crimson underline">
           sandy@keggersmobilebar.com
         </a>
-        <a href="tel:+12623435789" className="text-gold underline">
+        <a href="tel:+12623435789" className="text-crimson underline">
           (262) 343-5789
         </a>
       </div>
 
       {createInquiry.isSuccess ? (
-        <div className="mt-10 rounded-lg border border-gold/20 bg-black/35 p-8 text-center backdrop-blur-md">
-          <p className="font-script text-3xl text-gold">Thank you!</p>
-          <p className="font-serif mt-3 text-cream/85">
+        <div className="mt-10 rounded-lg border border-noir/10 bg-white p-8 text-center shadow-sm">
+          <p className="font-serif text-3xl font-semibold text-crimson">Thank you!</p>
+          <p className="font-serif mt-3 text-noir/75">
             Your inquiry is in — we'll be in touch soon to talk through the details.
           </p>
         </div>
       ) : (
         <form
           onSubmit={handleSubmit}
-          className="mt-10 flex flex-col gap-3 rounded-lg border border-gold/20 bg-black/35 p-6 backdrop-blur-md sm:p-8"
+          className="mt-10 flex flex-col gap-3 rounded-lg border border-noir/10 bg-white p-6 shadow-sm sm:p-8"
         >
           <input
             placeholder="Name"
             value={form.name}
             onChange={(e) => setForm({ ...form, name: e.target.value })}
             required
-            className="rounded border border-ink/20 bg-cream px-3 py-2 text-ink"
+            className={inputClass}
           />
           <input
             type="email"
@@ -67,14 +69,14 @@ export function Contact() {
             value={form.email}
             onChange={(e) => setForm({ ...form, email: e.target.value })}
             required
-            className="rounded border border-ink/20 bg-cream px-3 py-2 text-ink"
+            className={inputClass}
           />
           <input
             type="tel"
             placeholder="Phone (optional)"
             value={form.phone}
             onChange={(e) => setForm({ ...form, phone: e.target.value })}
-            className="rounded border border-ink/20 bg-cream px-3 py-2 text-ink"
+            className={inputClass}
           />
           <textarea
             placeholder="Tell us about your event — headcount, location, vision..."
@@ -82,15 +84,15 @@ export function Contact() {
             onChange={(e) => setForm({ ...form, message: e.target.value })}
             required
             rows={5}
-            className="rounded border border-ink/20 bg-cream px-3 py-2 text-ink"
+            className={inputClass}
           />
 
-          {error && <p className="text-sm text-gold">{error}</p>}
+          {error && <p className="text-sm text-crimson">{error}</p>}
 
           <button
             type="submit"
             disabled={createInquiry.isPending}
-            className="self-start rounded-full bg-gold px-8 py-3 text-sm font-bold tracking-wide text-plum uppercase transition-colors hover:bg-cream disabled:opacity-50"
+            className="self-start rounded-full bg-crimson px-8 py-3 text-sm font-bold tracking-wide text-white uppercase transition-colors hover:bg-noir disabled:opacity-50"
           >
             {createInquiry.isPending ? 'Sending…' : 'Send Inquiry'}
           </button>

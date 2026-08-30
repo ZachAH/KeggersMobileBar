@@ -1,6 +1,5 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { GoldSilkBackground } from './components/GoldSilkBackground'
 import { Layout } from './components/Layout'
 import { ProtectedRoute } from './components/ProtectedRoute'
 import { About } from './pages/About'
@@ -25,7 +24,6 @@ const queryClient = new QueryClient({
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <GoldSilkBackground />
       <BrowserRouter>
         <Routes>
           <Route element={<Layout />}>

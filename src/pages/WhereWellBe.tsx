@@ -8,12 +8,10 @@ export function WhereWellBe() {
     <div className="mx-auto max-w-2xl">
       <SectionHeading>Where We'll Be</SectionHeading>
 
-      {isLoading && <p className="mt-6 text-center text-cream/80">Loading…</p>}
-      {error && (
-        <p className="mt-6 text-center text-gold">Couldn't load upcoming stops right now.</p>
-      )}
+      {isLoading && <p className="mt-6 text-center text-noir/70">Loading…</p>}
+      {error && <p className="mt-6 text-center text-crimson">Couldn't load upcoming stops right now.</p>}
       {locations && locations.length === 0 && (
-        <p className="mt-6 text-center text-cream/70">
+        <p className="mt-6 text-center text-noir/70">
           No upcoming stops posted yet — check back soon!
         </p>
       )}
@@ -22,7 +20,7 @@ export function WhereWellBe() {
         {locations?.map((loc) => (
           <li
             key={loc.id}
-            className="flex items-start gap-4 rounded-lg border border-gold/20 bg-black/35 p-4 backdrop-blur-md"
+            className="flex items-start gap-4 rounded-lg border border-noir/10 bg-white p-4 shadow-sm"
           >
             {loc.image_url && (
               <img
@@ -32,9 +30,9 @@ export function WhereWellBe() {
               />
             )}
             <div>
-              <p className="font-semibold text-cream">{loc.venue_name}</p>
-              <p className="text-sm text-cream/65">{loc.address}</p>
-              <p className="text-sm text-cream/65">
+              <p className="font-semibold text-noir">{loc.venue_name}</p>
+              <p className="text-sm text-noir/60">{loc.address}</p>
+              <p className="text-sm text-noir/60">
                 {new Date(loc.event_date).toLocaleDateString(undefined, {
                   weekday: 'long',
                   month: 'long',
@@ -42,7 +40,7 @@ export function WhereWellBe() {
                 })}{' '}
                 · {loc.start_time}–{loc.end_time}
               </p>
-              {loc.notes && <p className="mt-2 text-sm text-cream/80">{loc.notes}</p>}
+              {loc.notes && <p className="mt-2 text-sm text-noir/75">{loc.notes}</p>}
             </div>
           </li>
         ))}

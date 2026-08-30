@@ -34,7 +34,7 @@ export function Login() {
       <SectionHeading>Admin Login</SectionHeading>
       <form
         onSubmit={handleSubmit}
-        className="mt-8 flex flex-col gap-4 rounded-lg border border-gold/20 bg-black/35 p-6 backdrop-blur-md"
+        className="mt-8 flex flex-col gap-4 rounded-lg border border-noir/10 bg-white p-6 shadow-sm"
       >
         <input
           type="email"
@@ -42,7 +42,7 @@ export function Login() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
-          className="rounded border border-ink/20 bg-cream px-3 py-2 text-ink"
+          className="rounded border border-noir/20 bg-white px-3 py-2 text-noir focus:border-crimson focus:outline-none"
         />
         <input
           type="password"
@@ -50,13 +50,13 @@ export function Login() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
-          className="rounded border border-ink/20 bg-cream px-3 py-2 text-ink"
+          className="rounded border border-noir/20 bg-white px-3 py-2 text-noir focus:border-crimson focus:outline-none"
         />
-        {error && <p className="text-sm text-gold">{error}</p>}
+        {error && <p className="text-sm text-crimson">{error}</p>}
         <button
           type="submit"
           disabled={submitting}
-          className="rounded bg-gold px-4 py-2 text-plum transition-colors hover:bg-cream disabled:opacity-50"
+          className="rounded bg-crimson px-4 py-2 text-white transition-colors hover:bg-noir disabled:opacity-50"
         >
           {submitting ? 'Signing in…' : 'Sign in'}
         </button>

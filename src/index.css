@@ -15,10 +15,14 @@
   --color-gold: #d4af37;
   --color-teal: #145c3f;
   --color-red: #6e1423;
+
+  --color-crimson: #c8102e;
+  --color-noir: #141414;
+  --color-paper: #faf9f6;
 }
 
 html {
-  background-color: #070707;
+  background-color: var(--color-paper);
 }
 
 body,
@@ -28,49 +32,7 @@ body,
 
 body {
   margin: 0;
-  color: var(--color-ink);
+  color: var(--color-noir);
   font-family: var(--font-sans);
 }
 
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-.animate-float {
-  animation: float 4.5s ease-in-out infinite;
-}
-
-@keyframes rise-fade {
-  0% {
-    transform: translateY(0) scale(0.7);
-    opacity: 0;
-  }
-  25% {
-    opacity: 0.9;
-  }
-  100% {
-    transform: translateY(-52px) scale(1);
-    opacity: 0;
-  }
-}
-
-.bubble {
-  position: absolute;
-  bottom: 8%;
-  width: 7px;
-  height: 7px;
-  border-radius: 9999px;
-  background: currentColor;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.group:hover .bubble {
-  animation: rise-fade 1.6s ease-in-out infinite;
-}
