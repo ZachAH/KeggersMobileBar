@@ -50,8 +50,8 @@ export function Home() {
       <div className="mx-auto grid max-w-5xl gap-10 px-6 py-20 sm:grid-cols-2 sm:items-center sm:gap-16 sm:py-28">
         <Reveal>
           <img
-            src="/gallery/mobile-bar-trailer.jpeg"
-            alt="The Keggers Mobile Bar trailer set up at an event"
+            src="/gallery/signature-pour.jpeg"
+            alt="A signature Keggers Mobile Bar pour"
             className="w-full rounded-2xl object-cover shadow-xl"
           />
         </Reveal>
