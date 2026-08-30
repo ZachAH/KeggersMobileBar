@@ -71,16 +71,6 @@ export function Home() {
           <span className="text-cream">Seasonal.</span> <span className="text-gold">Handcrafted.</span>{' '}
           <span className="text-cream">Mocktails.</span>
         </p>
-        <div className="group relative mx-auto mt-8 max-w-2xl">
-          <img
-            src="/header/mocktail-trio.png"
-            alt="Three Keggers Mobile Bar mocktails: Marigold Mule, Ginger Berry Fizz, and Berry In Love"
-            className="w-full transition-transform duration-300 ease-out group-hover:-translate-y-1 group-hover:scale-[1.03]"
-          />
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 text-gold/50">
-            <Bubbles />
-          </div>
-        </div>
         {featuredDrinks && featuredDrinks.length > 0 && (
           <div className="mt-8 grid gap-6 sm:grid-cols-3">
             {featuredDrinks.map((item) => (

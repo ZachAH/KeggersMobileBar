@@ -181,6 +181,10 @@ export function MenuManager() {
             className="mt-1 block w-full text-sm text-cream/70 file:mr-3 file:rounded file:border-0 file:bg-gold file:px-3 file:py-2 file:text-sm file:font-semibold file:text-plum hover:file:bg-cream"
           />
         </label>
+        <p className="text-xs text-cream/50">
+          If you're uploading an image for the favorites page, please remove the background before
+          uploading.
+        </p>
         {previewSrc && (
           <img src={previewSrc} alt="Selected preview" className="h-24 w-24 rounded object-cover" />
         )}
