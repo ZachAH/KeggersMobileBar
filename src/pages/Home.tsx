@@ -135,7 +135,7 @@ export function Home() {
         <div className="mx-auto mt-10 grid max-w-5xl gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {galleryPreview.map((item, i) => (
             <Reveal key={item.label} delay={i * 100}>
-              <div className="group relative h-56 overflow-hidden">
+              <div className="group relative h-56 overflow-hidden rounded-2xl">
                 <img
                   src={item.src}
                   alt={item.label}

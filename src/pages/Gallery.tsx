@@ -48,7 +48,7 @@ export function Gallery() {
             key={item.src}
             type="button"
             onClick={() => setSelected(item)}
-            className={`group relative block cursor-pointer overflow-hidden rounded-lg p-0 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg ${item.span}`}
+            className={`group relative block cursor-pointer overflow-hidden rounded-2xl p-0 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg ${item.span}`}
           >
             <img
               src={item.src}
@@ -80,7 +80,7 @@ export function Gallery() {
             src={selected.src}
             alt={selected.alt}
             onClick={(e) => e.stopPropagation()}
-            className="max-h-full max-w-full rounded-lg object-contain shadow-2xl"
+            className="max-h-full max-w-full rounded-2xl object-contain shadow-2xl"
           />
         </div>
       )}
