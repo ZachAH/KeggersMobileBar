@@ -26,7 +26,7 @@ function DrinkShowcase({ items, emptyMessage }: { items: MenuItem[]; emptyMessag
                   <img
                     src={item.image_url}
                     alt={item.name}
-                    className="mx-auto h-auto w-full max-w-sm object-contain drop-shadow-2xl sm:max-w-md"
+                    className="mx-auto h-auto w-full max-w-sm rounded-2xl object-contain drop-shadow-2xl sm:max-w-md"
                   />
                 )}
               </div>
@@ -57,9 +57,10 @@ export function Menu() {
 
   return (
     <div className="mx-auto max-w-5xl">
-      <SectionHeading>Seasonal Menu</SectionHeading>
+      <SectionHeading>Seasonal Preview Menu</SectionHeading>
       <p className="font-serif mt-4 text-center text-lg text-noir/70 italic">
-        This season's curated lineup — a handful of signature drinks, crafted with care.
+        A preview of what's pouring this season — Sandy also hand-crafts custom mocktails and
+        wellness teas for every occasion, so ask us about building a menu just for your event.
       </p>
 
       {isLoading && <p className="mt-10 text-center text-noir/70">Loading…</p>}
