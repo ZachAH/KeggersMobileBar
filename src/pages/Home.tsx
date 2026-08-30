@@ -8,6 +8,7 @@ const galleryPreview = [
   { src: '/preview/charitable-event.jpg', label: 'Community & Charity Events' },
   { src: '/preview/farmers-market-setup.jpeg', label: 'Farmers Market' },
   { src: '/preview/owner.jpg', label: 'Art Musuem' },
+  { src: '/gallery/wedding.jpg', label: 'Weddings' },
 ]
 
 export function Home() {
@@ -131,7 +132,7 @@ export function Home() {
           <h2 className="font-serif text-4xl font-semibold">Us in Action</h2>
           <p className="mt-2 text-sm text-noir/60">A peek behind the bar.</p>
         </Reveal>
-        <div className="mx-auto mt-10 grid max-w-5xl gap-4 sm:grid-cols-3">
+        <div className="mx-auto mt-10 grid max-w-5xl gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {galleryPreview.map((item, i) => (
             <Reveal key={item.label} delay={i * 100}>
               <div className="group relative h-56 overflow-hidden">
