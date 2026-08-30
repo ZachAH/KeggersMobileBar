@@ -72,26 +72,32 @@ export function Home() {
           <span className="text-cream">Mocktails.</span>
         </p>
         {featuredDrinks && featuredDrinks.length > 0 && (
-          <div className="mt-8 grid gap-6 sm:grid-cols-3">
+          <div
+            className={`mt-10 grid gap-10 ${
+              featuredDrinks.length === 1
+                ? 'mx-auto max-w-lg'
+                : featuredDrinks.length === 2
+                  ? 'sm:grid-cols-2'
+                  : 'sm:grid-cols-3'
+            }`}
+          >
             {featuredDrinks.map((item) => (
-              <div
+              <Link
                 key={item.id}
-                className={`group relative overflow-hidden rounded-lg border border-gold/20 bg-black/35 text-left backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-gold/40 hover:shadow-lg ${item.color.replace('bg-', 'text-')}`}
+                to="/menu"
+                className="group flex flex-col items-center transition-transform duration-300 ease-out hover:-translate-y-2 hover:scale-105"
               >
                 {item.image_url && (
-                  <img src={item.image_url} alt={item.name} className="h-40 w-full object-cover" />
+                  <img
+                    src={item.image_url}
+                    alt={item.name}
+                    className="h-auto w-full max-h-[30rem] object-contain drop-shadow-[0_20px_30px_rgba(0,0,0,0.55)] transition-[filter] duration-300 group-hover:drop-shadow-[0_25px_40px_rgba(212,175,55,0.35)] sm:max-h-[36rem]"
+                  />
                 )}
-                <div className="p-5">
-                  <p className="text-lg font-semibold text-cream">{item.name}</p>
-                  <ul className="mt-2 space-y-0.5 text-sm text-cream/65">
-                    {item.ingredients.map((ingredient) => (
-                      <li key={ingredient}>{ingredient}</li>
-                    ))}
-                  </ul>
-                </div>
-                <span className={`block h-2 w-full ${item.color}`} />
-                <Bubbles />
-              </div>
+                <p className="font-script mt-4 text-3xl text-gold underline-offset-8 group-hover:underline">
+                  {item.name}
+                </p>
+              </Link>
             ))}
           </div>
         )}
