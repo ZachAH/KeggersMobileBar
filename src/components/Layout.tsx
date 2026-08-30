@@ -24,7 +24,7 @@ export function Layout() {
             What We Offer
           </NavLink>
           <NavLink to="/menu" className={navLinkClass}>
-            Menu
+            Seasonal Menu
           </NavLink>
           <NavLink to="/gallery" className={navLinkClass}>
             Gallery

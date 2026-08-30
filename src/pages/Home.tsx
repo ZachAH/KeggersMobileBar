@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom'
 import { Bubbles } from '../components/Bubbles'
 import { Testimonials } from '../components/Testimonials'
 import { useLocations } from '../hooks/useLocations'
-import { useMenuItems } from '../hooks/useMenuItems'
 
 const galleryPreview = [
   {
@@ -17,8 +16,6 @@ const galleryPreview = [
 export function Home() {
   const { data: locations } = useLocations()
   const upcoming = locations?.slice(0, 2)
-  const { data: menuItems } = useMenuItems()
-  const featuredDrinks = menuItems?.filter((item) => item.favorite).slice(0, 3)
 
   return (
     <div className="mx-auto flex max-w-5xl flex-col gap-20">
@@ -71,36 +68,6 @@ export function Home() {
           <span className="text-cream">Seasonal.</span> <span className="text-gold">Handcrafted.</span>{' '}
           <span className="text-cream">Mocktails.</span>
         </p>
-        {featuredDrinks && featuredDrinks.length > 0 && (
-          <div
-            className={`mt-10 grid gap-10 ${
-              featuredDrinks.length === 1
-                ? 'mx-auto max-w-lg'
-                : featuredDrinks.length === 2
-                  ? 'sm:grid-cols-2'
-                  : 'sm:grid-cols-3'
-            }`}
-          >
-            {featuredDrinks.map((item) => (
-              <Link
-                key={item.id}
-                to="/menu"
-                className="group flex flex-col items-center transition-transform duration-300 ease-out hover:-translate-y-2 hover:scale-105"
-              >
-                {item.image_url && (
-                  <img
-                    src={item.image_url}
-                    alt={item.name}
-                    className="h-auto w-full max-h-[30rem] object-contain drop-shadow-[0_20px_30px_rgba(0,0,0,0.55)] transition-[filter] duration-300 group-hover:drop-shadow-[0_25px_40px_rgba(212,175,55,0.35)] sm:max-h-[36rem]"
-                  />
-                )}
-                <p className="font-script mt-4 text-3xl text-gold underline-offset-8 group-hover:underline">
-                  {item.name}
-                </p>
-              </Link>
-            ))}
-          </div>
-        )}
       </div>
 
       <Testimonials />

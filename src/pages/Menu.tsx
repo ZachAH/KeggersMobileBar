@@ -4,10 +4,11 @@ import { useMenuItems } from '../hooks/useMenuItems'
 
 export function Menu() {
   const { data: items, isLoading, error } = useMenuItems()
+  const favorites = items?.filter((item) => item.favorite)
 
   return (
     <div className="mx-auto max-w-4xl">
-      <SectionHeading>Mocktail Menu</SectionHeading>
+      <SectionHeading>Seasonal Menu</SectionHeading>
       <p className="font-serif mt-4 text-center text-lg text-cream/70 italic">
         This season's curated lineup — with more arriving soon.
       </p>
@@ -22,7 +23,32 @@ export function Menu() {
         </p>
       )}
 
-      <div className="mt-10 grid gap-6 sm:grid-cols-2">
+      {favorites && favorites.length > 0 && (
+        <div
+          className={`mt-10 grid gap-10 ${
+            favorites.length === 1
+              ? 'mx-auto max-w-lg'
+              : favorites.length === 2
+                ? 'sm:grid-cols-2'
+                : 'sm:grid-cols-3'
+          }`}
+        >
+          {favorites.map((item) => (
+            <div key={item.id} className="flex flex-col items-center">
+              {item.image_url && (
+                <img
+                  src={item.image_url}
+                  alt={item.name}
+                  className="h-auto w-full max-h-[30rem] object-contain drop-shadow-[0_20px_30px_rgba(0,0,0,0.55)] sm:max-h-[36rem]"
+                />
+              )}
+              <p className="font-script mt-4 text-3xl text-gold">{item.name}</p>
+            </div>
+          ))}
+        </div>
+      )}
+
+      <div className="mt-16 grid gap-6 sm:grid-cols-2">
         {items?.map((item) => (
           <div
             key={item.id}
