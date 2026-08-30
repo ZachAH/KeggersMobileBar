@@ -35,6 +35,7 @@ export function MenuManager() {
   const [error, setError] = useState<string | null>(null)
   const [favoriteError, setFavoriteError] = useState<string | null>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const formRef = useRef<HTMLFormElement>(null)
 
   const isSaving = createMenuItem.isPending || updateMenuItem.isPending
 
@@ -58,6 +59,7 @@ export function MenuManager() {
     setImageFile(null)
     setImagePreview(null)
     setError(null)
+    formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 
   function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -138,10 +140,17 @@ export function MenuManager() {
       <p className="mt-1 text-sm text-cream/60">
         Star up to {MAX_FAVORITES} drinks to feature them on the landing page.
       </p>
+      <p className="mt-1 text-sm text-cream/60">
+        Made a typo or want to swap a photo? Click <span className="text-gold">Edit</span> on the
+        drink below — no need to delete and re-add it.
+      </p>
 
       <form
+        ref={formRef}
         onSubmit={handleSubmit}
-        className="mt-3 flex flex-col gap-3 rounded-lg border border-gold/20 bg-black/35 p-4 backdrop-blur-md"
+        className={`mt-3 flex flex-col gap-3 rounded-lg border p-4 backdrop-blur-md transition-colors ${
+          editingId ? 'border-gold/60 bg-black/50' : 'border-gold/20 bg-black/35'
+        }`}
       >
         <h3 className="font-semibold text-cream">{editingId ? 'Edit drink' : 'Add a drink'}</h3>
         <input

@@ -43,9 +43,71 @@ export function Layout() {
       <main className="flex-1 px-6 py-12">
         <Outlet />
       </main>
-      <footer className="border-t border-cream/15 px-6 py-6 text-center text-sm text-cream/60">
-        © {new Date().getFullYear()} Keggers Mobile Bar — mocktails, cocktails &amp; full bar
-        service
+      <footer className="border-t border-cream/15 px-6 py-12 text-sm text-cream/70">
+        <div className="mx-auto grid max-w-5xl gap-10 sm:grid-cols-3">
+          <div>
+            <img src="/logo-header-gold.png" alt="Keggers Mobile Bar" className="h-14 w-auto" />
+            <p className="mt-4 max-w-xs text-cream/60">
+              Elevated mobile bar experiences for weddings, private parties, corporate events, and
+              charitable events throughout Wisconsin.
+            </p>
+          </div>
+          <div>
+            <p className="font-semibold tracking-wide text-gold uppercase">Explore</p>
+            <nav className="mt-4 flex flex-col gap-2">
+              <NavLink to="/" end className="transition-colors hover:text-gold">
+                Home
+              </NavLink>
+              <NavLink to="/what-we-offer" className="transition-colors hover:text-gold">
+                What We Offer
+              </NavLink>
+              <NavLink to="/menu" className="transition-colors hover:text-gold">
+                Seasonal Menu
+              </NavLink>
+              <NavLink to="/gallery" className="transition-colors hover:text-gold">
+                Gallery
+              </NavLink>
+              <NavLink to="/where-well-be" className="transition-colors hover:text-gold">
+                Where We'll Be
+              </NavLink>
+              <NavLink to="/about" className="transition-colors hover:text-gold">
+                About
+              </NavLink>
+              <NavLink to="/contact" className="transition-colors hover:text-gold">
+                Contact
+              </NavLink>
+            </nav>
+          </div>
+          <div>
+            <p className="font-semibold tracking-wide text-gold uppercase">Get In Touch</p>
+            <div className="mt-4 flex flex-col gap-2">
+              <a href="mailto:sandy@keggersmobilebar.com" className="transition-colors hover:text-gold">
+                sandy@keggersmobilebar.com
+              </a>
+              <a href="tel:+12623435789" className="transition-colors hover:text-gold">
+                (262) 343-5789
+              </a>
+              <p className="text-cream/60">Serving Wisconsin &amp; surrounding areas</p>
+            </div>
+          </div>
+        </div>
+        <div className="mx-auto mt-10 flex max-w-5xl flex-col items-center gap-2 border-t border-cream/15 pt-6 text-center text-xs text-cream/50 sm:flex-row sm:justify-between sm:text-left">
+          <p>
+            © {new Date().getFullYear()} Keggers Mobile Bar — mocktails, cocktails &amp; full bar
+            service
+          </p>
+          <p>
+            Site by{' '}
+            <a
+              href="https://zachhowell.dev/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gold underline transition-colors hover:text-cream"
+            >
+              ZH Web Solutions
+            </a>
+          </p>
+        </div>
       </footer>
     </div>
   )
