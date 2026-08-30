@@ -19,47 +19,55 @@ export function Home() {
 
   return (
     <div className="mx-auto flex max-w-5xl flex-col gap-20">
-      <div className="mx-auto flex max-w-3xl flex-col items-center gap-12 text-center">
-        <div>
-          <h1 className="sr-only">
-            Keggers Mobile Bar — Mocktails, Cocktails &amp; Full Bar Service
-          </h1>
-          <p className="text-sm font-semibold tracking-[0.3em] text-gold uppercase">
-            Crafted Mocktails &middot; Signature Cocktails &middot; Beer &amp; Wine Service
-          </p>
-          <img
-            src="/logo-header-gold.png"
-            alt="Keggers Mobile Bar"
-            className="animate-float mx-auto mt-4 h-64 w-auto sm:h-80"
+      <div className="mx-auto flex max-w-3xl flex-col items-center gap-8 text-center">
+        <h1 className="sr-only">
+          Keggers Mobile Bar — Mocktails, Cocktails &amp; Full Bar Service
+        </h1>
+        <p className="text-sm font-semibold tracking-[0.3em] text-gold uppercase">
+          Crafted Mocktails &middot; Signature Cocktails &middot; Beer &amp; Wine Service
+        </p>
+
+        <div className="relative w-full overflow-hidden rounded-2xl">
+          <video
+            className="h-[280px] w-full object-cover sm:h-[420px]"
+            src="/video/hero.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
           />
-          <p className="font-serif mx-auto mt-4 max-w-xl text-2xl text-gold italic">
-            More than a bar. It's an experience.
-          </p>
-          <p className="font-serif mx-auto mt-4 max-w-xl text-xl text-cream/90 italic">
-            Elevated mobile bar experiences for weddings, private parties, corporate events, and
-            charitable events throughout Wisconsin — mocktails are our specialty, and we pour
-            cocktails and beer &amp; wine too.
-          </p>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-            <Link
-              to="/menu"
-              className="rounded-full border border-cream/60 px-6 py-3 text-sm font-semibold tracking-wide text-cream uppercase transition-colors hover:bg-gold hover:text-plum"
-            >
-              View the Menu
-            </Link>
-            <Link
-              to="/contact"
-              className="rounded-full bg-gold px-10 py-4 text-base font-bold tracking-wide text-plum uppercase shadow-md transition-all hover:scale-105 hover:bg-cream"
-            >
-              Inquire Now
-            </Link>
-            <Link
-              to="/where-well-be"
-              className="rounded-full border border-cream/60 px-6 py-3 text-sm font-semibold tracking-wide text-cream uppercase transition-colors hover:bg-gold hover:text-plum"
-            >
-              Find Us
-            </Link>
+          <div className="absolute top-4 left-4 rounded-lg bg-black/50 p-2 backdrop-blur-sm">
+            <img src="/logo-header-gold.png" alt="Keggers Mobile Bar" className="h-14 w-auto sm:h-20" />
           </div>
+        </div>
+
+        <p className="font-serif max-w-xl text-2xl text-gold italic">
+          More than a bar. It's an experience.
+        </p>
+        <p className="font-serif max-w-xl text-xl text-cream/90 italic">
+          Elevated mobile bar experiences for weddings, private parties, corporate events, and
+          charitable events throughout Wisconsin — mocktails are our specialty, and we pour
+          cocktails and beer &amp; wine too.
+        </p>
+        <div className="flex flex-wrap items-center justify-center gap-4">
+          <Link
+            to="/menu"
+            className="rounded-full border border-cream/60 px-6 py-3 text-sm font-semibold tracking-wide text-cream uppercase transition-colors hover:bg-gold hover:text-plum"
+          >
+            View the Menu
+          </Link>
+          <Link
+            to="/contact"
+            className="rounded-full bg-gold px-10 py-4 text-base font-bold tracking-wide text-plum uppercase shadow-md transition-all hover:scale-105 hover:bg-cream"
+          >
+            Inquire Now
+          </Link>
+          <Link
+            to="/where-well-be"
+            className="rounded-full border border-cream/60 px-6 py-3 text-sm font-semibold tracking-wide text-cream uppercase transition-colors hover:bg-gold hover:text-plum"
+          >
+            Find Us
+          </Link>
         </div>
       </div>
 
