@@ -125,7 +125,7 @@ export function MenuManager() {
     <div className="mt-8">
       <h2 className="font-semibold text-noir">Manage Menu</h2>
       <p className="mt-1 text-sm text-noir/60">
-        Choose which section — mocktails or wellness teas — each drink belongs to.
+        Choose which section — mocktails or wellness mocktails — each drink belongs to.
       </p>
       <p className="mt-1 text-sm text-noir/60">
         Made a typo or want to swap a photo? Click <span className="text-crimson">Edit</span> on

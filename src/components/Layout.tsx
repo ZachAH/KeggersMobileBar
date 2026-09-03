@@ -24,7 +24,7 @@ export function Layout() {
             What We Offer
           </NavLink>
           <NavLink to="/menu" className={navLinkClass}>
-            Seasonal Menu
+            Handcrafted Mocktails
           </NavLink>
           <NavLink to="/gallery" className={navLinkClass}>
             Gallery
@@ -62,7 +62,7 @@ export function Layout() {
                 What We Offer
               </NavLink>
               <NavLink to="/menu" className="transition-colors hover:text-crimson">
-                Seasonal Menu
+                Handcrafted Mocktails
               </NavLink>
               <NavLink to="/gallery" className="transition-colors hover:text-crimson">
                 Gallery

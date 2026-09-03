@@ -54,9 +54,9 @@ function DrinkShowcase({ items, emptyMessage }: { items: MenuItem[]; emptyMessag
 
 export function Menu() {
   useSEO({
-    title: 'Seasonal Preview Menu',
+    title: 'Mocktail Menu Preview',
     description:
-      "A preview of this season's handcrafted mocktails and wellness teas from Keggers Mobile Bar — plus custom menus crafted for weddings and private events throughout Wisconsin.",
+      "A preview of this season's handcrafted mocktails and wellness mocktails from Keggers Mobile Bar — plus custom menus crafted for weddings and private events throughout Wisconsin.",
   })
   const { data: items, isLoading, error } = useMenuItems()
   const mocktails = items?.filter((item) => item.category === 'mocktail') ?? []
@@ -64,11 +64,12 @@ export function Menu() {
 
   return (
     <div className="mx-auto max-w-5xl">
-      <Breadcrumbs current="Seasonal Menu" href="/menu" />
-      <SectionHeading>Seasonal Preview Menu</SectionHeading>
+      <Breadcrumbs current="Handcrafted Mocktails" href="/menu" />
+      <SectionHeading>Mocktail Menu Preview</SectionHeading>
       <p className="font-serif mt-4 text-center text-lg text-noir/70 italic">
-        A preview of what's pouring this season — Sandy also hand-crafts custom mocktails and
-        wellness teas for every occasion, so ask us about building a menu just for your event.
+        Forget boring soda and juice. Our mocktails are crafted with fresh ingredients, homemade
+        syrups, premium mixers and creative garnishes to create a sophisticated zero-proof
+        experience.
       </p>
 
       {isLoading && <p className="mt-10 text-center text-noir/70">Loading…</p>}
@@ -97,9 +98,9 @@ export function Menu() {
               Sip &amp; Restore
             </p>
             <h2 className="font-serif mt-2 text-3xl font-semibold text-noir sm:text-4xl">
-              Seasonal Wellness Teas
+              Wellness Mocktails
             </h2>
-            <DrinkShowcase items={wellnessTeas} emptyMessage="New wellness teas coming soon." />
+            <DrinkShowcase items={wellnessTeas} emptyMessage="New wellness mocktails coming soon." />
           </div>
         </>
       )}

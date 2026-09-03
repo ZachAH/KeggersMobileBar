@@ -11,5 +11,5 @@ export const menuColors = [
 
 export const menuCategories = [
   { label: 'Seasonal Mocktail', value: 'mocktail' },
-  { label: 'Seasonal Wellness Tea', value: 'wellness-tea' },
+  { label: 'Wellness Mocktail', value: 'wellness-tea' },
 ] as const
