@@ -2,6 +2,8 @@
 # since Netlify evaluates these top to bottom.
 /packages        /what-we-offer    301!
 /faq             /what-we-offer    301!
+/about-us        /about            301!
+/about-us/       /about            301!
 
 # SPA rewrite rule (keep this at the bottom — everything else falls through
 # to the React app's client-side router)
