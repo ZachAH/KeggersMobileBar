@@ -3,9 +3,11 @@ import { type FormEvent, useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
 import { SectionHeading } from '../../components/SectionHeading'
 import { useAuth } from '../../hooks/useAuth'
+import { useSEO } from '../../hooks/useSEO'
 import { auth } from '../../lib/firebase'
 
 export function Login() {
+  useSEO({ title: 'Admin Login', description: 'Admin sign-in for Keggers Mobile Bar.', noindex: true })
   const { isAuthenticated } = useAuth()
   const navigate = useNavigate()
   const [email, setEmail] = useState('')

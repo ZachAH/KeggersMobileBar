@@ -3,6 +3,7 @@ import { Reveal } from '../components/Reveal'
 import { Testimonials } from '../components/Testimonials'
 import { TickerStrip } from '../components/TickerStrip'
 import { useLocations } from '../hooks/useLocations'
+import { useSEO } from '../hooks/useSEO'
 
 const galleryPreview = [
   { src: '/preview/charitable-event.jpg', label: 'Community & Charity Events' },
@@ -12,6 +13,11 @@ const galleryPreview = [
 ]
 
 export function Home() {
+  useSEO({
+    title: 'Keggers Mobile Bar',
+    description:
+      "Keggers Mobile Bar is a family-owned mobile bar service in Wisconsin, specializing in handcrafted mocktails alongside signature cocktails and beer & wine service for weddings, private parties, corporate events, and charitable events.",
+  })
   const { data: locations } = useLocations()
   const upcoming = locations?.slice(0, 2)
 

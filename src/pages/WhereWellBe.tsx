@@ -1,11 +1,19 @@
+import { Breadcrumbs } from '../components/Breadcrumbs'
 import { SectionHeading } from '../components/SectionHeading'
 import { useLocations } from '../hooks/useLocations'
+import { useSEO } from '../hooks/useSEO'
 
 export function WhereWellBe() {
+  useSEO({
+    title: "Where We'll Be",
+    description:
+      "See where Keggers Mobile Bar is pouring next — upcoming farmers markets, festivals, and public events across Wisconsin.",
+  })
   const { data: locations, isLoading, error } = useLocations()
 
   return (
     <div className="mx-auto max-w-2xl">
+      <Breadcrumbs current="Where We'll Be" href="/where-well-be" />
       <SectionHeading>Where We'll Be</SectionHeading>
 
       {isLoading && <p className="mt-6 text-center text-noir/70">Loading…</p>}

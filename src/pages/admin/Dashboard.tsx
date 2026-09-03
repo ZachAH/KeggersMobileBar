@@ -5,6 +5,7 @@ import { MenuManager } from '../../components/admin/MenuManager'
 import { NotificationSettings } from '../../components/admin/NotificationSettings'
 import { useDeleteInquiry, useInquiries } from '../../hooks/useInquiries'
 import { useCreateLocation, useDeleteLocation, useLocations } from '../../hooks/useLocations'
+import { useSEO } from '../../hooks/useSEO'
 import { auth } from '../../lib/firebase'
 import type { Inquiry } from '../../types/inquiry'
 
@@ -31,6 +32,7 @@ const emptyForm = {
 const MAX_IMAGE_BYTES = 5 * 1024 * 1024
 
 export function Dashboard() {
+  useSEO({ title: 'Admin Dashboard', description: 'Admin dashboard for Keggers Mobile Bar.', noindex: true })
   const navigate = useNavigate()
   const { data: locations, isLoading } = useLocations()
   const createLocation = useCreateLocation()

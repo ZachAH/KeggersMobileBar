@@ -1,9 +1,18 @@
+import { Breadcrumbs } from '../components/Breadcrumbs'
 import { Reveal } from '../components/Reveal'
 import { SectionHeading } from '../components/SectionHeading'
+import { useSEO } from '../hooks/useSEO'
 
 export function About() {
+  useSEO({
+    title: 'About',
+    description:
+      "Meet Sandy Kagan, owner of Keggers Mobile Bar — a family-owned mobile bar service crafting handcrafted mocktails and cocktails for events throughout Wisconsin.",
+  })
+
   return (
     <div className="mx-auto max-w-5xl">
+      <Breadcrumbs current="About" href="/about" />
       <SectionHeading>About Kegger's Mobile Bar</SectionHeading>
 
       <div className="mt-12 grid gap-10 sm:grid-cols-2 sm:items-start sm:gap-16">

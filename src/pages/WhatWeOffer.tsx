@@ -1,10 +1,19 @@
+import { Breadcrumbs } from '../components/Breadcrumbs'
 import { SectionHeading } from '../components/SectionHeading'
 import { faq } from '../data/faq'
 import { services, whyChooseFeatures } from '../data/services'
+import { useSEO } from '../hooks/useSEO'
 
 export function WhatWeOffer() {
+  useSEO({
+    title: 'What We Offer',
+    description:
+      'Mocktail bar service, cocktail bar service, and beer & wine service for weddings, corporate events, and private parties throughout Wisconsin — plus frequently asked questions.',
+  })
+
   return (
     <div className="mx-auto max-w-4xl">
+      <Breadcrumbs current="What We Offer" href="/what-we-offer" />
       <SectionHeading>What We Offer</SectionHeading>
       <p className="font-serif mx-auto mt-4 max-w-xl text-center text-lg text-noir/70 italic">
         More than a bar. It's an experience.

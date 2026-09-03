@@ -1,6 +1,8 @@
+import { Breadcrumbs } from '../components/Breadcrumbs'
 import { Reveal } from '../components/Reveal'
 import { SectionHeading } from '../components/SectionHeading'
 import { useMenuItems } from '../hooks/useMenuItems'
+import { useSEO } from '../hooks/useSEO'
 import type { MenuItem } from '../types/menuItem'
 
 function DrinkShowcase({ items, emptyMessage }: { items: MenuItem[]; emptyMessage: string }) {
@@ -51,12 +53,18 @@ function DrinkShowcase({ items, emptyMessage }: { items: MenuItem[]; emptyMessag
 }
 
 export function Menu() {
+  useSEO({
+    title: 'Seasonal Preview Menu',
+    description:
+      "A preview of this season's handcrafted mocktails and wellness teas from Keggers Mobile Bar — plus custom menus crafted for weddings and private events throughout Wisconsin.",
+  })
   const { data: items, isLoading, error } = useMenuItems()
   const mocktails = items?.filter((item) => item.category === 'mocktail') ?? []
   const wellnessTeas = items?.filter((item) => item.category === 'wellness-tea') ?? []
 
   return (
     <div className="mx-auto max-w-5xl">
+      <Breadcrumbs current="Seasonal Menu" href="/menu" />
       <SectionHeading>Seasonal Preview Menu</SectionHeading>
       <p className="font-serif mt-4 text-center text-lg text-noir/70 italic">
         A preview of what's pouring this season — Sandy also hand-crafts custom mocktails and

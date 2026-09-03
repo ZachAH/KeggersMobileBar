@@ -1,0 +1,21 @@
+# Keggers Mobile Bar
+
+> Keggers Mobile Bar is a family-owned mobile bar service based in Wisconsin, founded by Sandy Kagan. It specializes in handcrafted mocktails alongside signature cocktails and beer & wine service for weddings, private parties, corporate events, farmers markets, and charitable events.
+
+Keggers Mobile Bar pours from a converted trailer at events throughout Wisconsin. Mocktails are the specialty - seasonal, non-alcoholic drinks built with fresh juices, syrups, and garnishes - served alongside full cocktail and beer & wine service for guests who want alcohol.
+
+## Pages
+
+- [Home](https://keggersmobilebar.com/): Overview, intro video, testimonials, and upcoming public appearances.
+- [What We Offer](https://keggersmobilebar.com/what-we-offer): Services offered - mocktail bar service, cocktail bar service, beer & wine service - plus frequently asked questions.
+- [Seasonal Preview Menu](https://keggersmobilebar.com/menu): A preview of the current season's handcrafted mocktails and wellness teas. Sandy also hand-crafts custom drink menus for individual events.
+- [Gallery](https://keggersmobilebar.com/gallery): Photos from past weddings, farmers markets, festivals, and private events.
+- [Where We'll Be](https://keggersmobilebar.com/where-well-be): Upcoming public events where Keggers Mobile Bar will be pouring (farmers markets, festivals, etc.).
+- [About](https://keggersmobilebar.com/about): Owner Sandy Kagan's story and the philosophy behind the business.
+- [Contact](https://keggersmobilebar.com/contact): Inquiry form for booking an event, plus direct email and phone contact.
+
+## Contact
+
+- Email: sandy@keggersmobilebar.com
+- Phone: (262) 343-5789
+- Service area: Wisconsin and surrounding areas

@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
+import { Breadcrumbs } from '../components/Breadcrumbs'
 import { SectionHeading } from '../components/SectionHeading'
+import { useSEO } from '../hooks/useSEO'
 
 const photos = [
   { src: '/gallery/mobile-bar-trailer.jpeg', alt: 'The Mobile Bar', span: 'sm:row-span-2' },
@@ -18,6 +20,11 @@ const photos = [
 ]
 
 export function Gallery() {
+  useSEO({
+    title: 'Gallery',
+    description:
+      'Photos from weddings, farmers markets, festivals, and private events served by Keggers Mobile Bar throughout Wisconsin.',
+  })
   const [selected, setSelected] = useState<{ src: string; alt: string } | null>(null)
 
   useEffect(() => {
@@ -37,6 +44,7 @@ export function Gallery() {
 
   return (
     <div className="mx-auto max-w-4xl">
+      <Breadcrumbs current="Gallery" href="/gallery" />
       <SectionHeading>Us in Action</SectionHeading>
       <p className="mt-4 text-center text-sm text-noir/70">
         Farmers markets, festivals, weddings, and everything in between.

@@ -1,6 +1,8 @@
 import { type FormEvent, useState } from 'react'
+import { Breadcrumbs } from '../components/Breadcrumbs'
 import { SectionHeading } from '../components/SectionHeading'
 import { useCreateInquiry } from '../hooks/useInquiries'
+import { useSEO } from '../hooks/useSEO'
 import type { NewInquiry } from '../types/inquiry'
 
 const emptyForm: NewInquiry = {
@@ -13,6 +15,11 @@ const emptyForm: NewInquiry = {
 const inputClass = 'rounded border border-noir/20 bg-white px-3 py-2 text-noir focus:border-crimson focus:outline-none'
 
 export function Contact() {
+  useSEO({
+    title: 'Contact',
+    description:
+      'Get in touch with Keggers Mobile Bar to book your wedding, private party, corporate event, or charitable event in Wisconsin.',
+  })
   const createInquiry = useCreateInquiry()
   const [form, setForm] = useState<NewInquiry>(emptyForm)
   const [error, setError] = useState<string | null>(null)
@@ -30,6 +37,7 @@ export function Contact() {
 
   return (
     <div className="mx-auto max-w-2xl">
+      <Breadcrumbs current="Contact" href="/contact" />
       <SectionHeading>Get In Touch</SectionHeading>
       <p className="font-serif mt-4 text-center text-lg text-noir/70 italic">
         Tell us about your event, and we'll follow up to build something elegant together.
