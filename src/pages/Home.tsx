@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Reveal } from '../components/Reveal'
 import { Testimonials } from '../components/Testimonials'
@@ -12,6 +13,14 @@ const galleryPreview = [
   { src: '/gallery/wedding.jpg', label: 'Weddings' },
 ]
 
+const loadingMessages = [
+  'Shaking things up...',
+  'Popping the bottle cap...',
+  'Chilling the glassware...',
+  'Muddling the mint...',
+  'Pouring your experience...',
+]
+
 export function Home() {
   useSEO({
     title: 'Keggers Mobile Bar',
@@ -20,6 +29,16 @@ export function Home() {
   })
   const { data: locations } = useLocations()
   const upcoming = locations?.slice(0, 2)
+  const [videoReady, setVideoReady] = useState(false)
+  const [messageIndex, setMessageIndex] = useState(0)
+
+  useEffect(() => {
+    if (videoReady) return
+    const id = setInterval(() => {
+      setMessageIndex((i) => (i + 1) % loadingMessages.length)
+    }, 1800)
+    return () => clearInterval(id)
+  }, [videoReady])
 
   return (
     <div className="-mx-6 -mt-12 -mb-12 bg-paper text-noir">
@@ -31,6 +50,7 @@ export function Home() {
           loop
           muted
           playsInline
+          onCanPlay={() => setVideoReady(true)}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/10" />
         <div className="relative flex h-full flex-col items-start justify-end px-6 pb-16 sm:px-16 sm:pb-20">
@@ -48,6 +68,23 @@ export function Home() {
           >
             Inquire Now
           </Link>
+        </div>
+        <div
+          className={`absolute inset-0 flex flex-col items-center justify-center gap-4 bg-noir transition-opacity duration-700 ${
+            videoReady ? 'pointer-events-none opacity-0' : 'opacity-100'
+          }`}
+        >
+          <div className="flex gap-2">
+            <span className="h-2.5 w-2.5 animate-bounce rounded-full bg-crimson [animation-delay:-0.3s]" />
+            <span className="h-2.5 w-2.5 animate-bounce rounded-full bg-crimson [animation-delay:-0.15s]" />
+            <span className="h-2.5 w-2.5 animate-bounce rounded-full bg-crimson" />
+          </div>
+          <p
+            key={messageIndex}
+            className="animate-[fade-in_0.4s_ease] text-xs font-semibold tracking-[0.3em] text-white/80 uppercase"
+          >
+            {loadingMessages[messageIndex]}
+          </p>
         </div>
       </div>
 
