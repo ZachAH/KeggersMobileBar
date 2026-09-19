@@ -54,9 +54,12 @@ export function Home() {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/10" />
         <div className="relative flex h-full flex-col items-start justify-end px-6 pb-16 sm:px-16 sm:pb-20">
-          <p className="text-xs font-semibold tracking-[0.35em] text-crimson uppercase sm:text-sm">
-            Crafted Mocktails &middot; Signature Cocktails &middot; Beer &amp; Wine Service
-          </p>
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-2 shadow-lg backdrop-blur-md sm:px-5 sm:py-2.5">
+            <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-crimson" />
+            <p className="text-[11px] font-semibold tracking-[0.3em] text-white uppercase sm:text-sm">
+              Crafted Mocktails &middot; Signature Cocktails &middot; Beer &amp; Wine Service
+            </p>
+          </div>
           <h1 className="font-serif mt-4 max-w-2xl text-5xl leading-[1.05] font-semibold tracking-tight text-white sm:text-7xl">
             More Than A Bar.
             <br />
