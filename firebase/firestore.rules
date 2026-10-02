@@ -12,8 +12,16 @@ service cloud.firestore {
     }
 
     match /inquiries/{inquiryId} {
-      // Anyone can submit the public contact form...
-      allow create: if true;
+      // Anyone can submit the public contact form, but data must match our schema limits
+      allow create: if true
+        && request.resource.data.keys().hasOnly(['name', 'email', 'phone', 'message', 'created_at'])
+        && request.resource.data.keys().hasAll(['name', 'email', 'message', 'created_at'])
+        && request.resource.data.name is string && request.resource.data.name.size() > 0 && request.resource.data.name.size() <= 100
+        && request.resource.data.email is string && request.resource.data.email.size() > 0 && request.resource.data.email.size() <= 150
+        && request.resource.data.message is string && request.resource.data.message.size() > 0 && request.resource.data.message.size() <= 2000
+        && request.resource.data.created_at is string
+        && (!('phone' in request.resource.data) || (request.resource.data.phone is string && request.resource.data.phone.size() <= 30));
+        
       // ...but only signed-in users (mom's admin account) can read or manage
       // submissions — this keeps other people's contact info private.
       allow read, update, delete: if request.auth != null;

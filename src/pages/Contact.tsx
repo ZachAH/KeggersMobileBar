@@ -1,4 +1,4 @@
-import { type FormEvent, useState } from 'react'
+import { type FormEvent, useState, useEffect } from 'react'
 import { Breadcrumbs } from '../components/Breadcrumbs'
 import { SectionHeading } from '../components/SectionHeading'
 import { useCreateInquiry } from '../hooks/useInquiries'
@@ -24,12 +24,35 @@ export function Contact() {
   const [form, setForm] = useState<NewInquiry>(emptyForm)
   const [error, setError] = useState<string | null>(null)
 
+  const [honeypot, setHoneypot] = useState('')
+  const [captchaNum1, setCaptchaNum1] = useState(0)
+  const [captchaNum2, setCaptchaNum2] = useState(0)
+  const [captchaAnswer, setCaptchaAnswer] = useState('')
+
+  useEffect(() => {
+    setCaptchaNum1(Math.floor(Math.random() * 10) + 1)
+    setCaptchaNum2(Math.floor(Math.random() * 10) + 1)
+  }, [])
+
   async function handleSubmit(e: FormEvent) {
     e.preventDefault()
     setError(null)
+    
+    if (honeypot) {
+      // Fake success for bots
+      setForm(emptyForm)
+      return
+    }
+
+    if (parseInt(captchaAnswer, 10) !== captchaNum1 + captchaNum2) {
+      setError('Incorrect math answer. Please try again.')
+      return
+    }
+
     try {
       await createInquiry.mutateAsync(form)
       setForm(emptyForm)
+      setCaptchaAnswer('')
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Something went wrong — please try again.')
     }
@@ -64,11 +87,23 @@ export function Contact() {
           onSubmit={handleSubmit}
           className="mt-10 flex flex-col gap-3 rounded-lg border border-noir/10 bg-white p-6 shadow-sm sm:p-8"
         >
+          {/* Honeypot field - hidden from real users but bots will fill it */}
+          <input
+            type="text"
+            name="address"
+            tabIndex={-1}
+            autoComplete="off"
+            className="absolute -left-[9999px] h-0 w-0 opacity-0"
+            value={honeypot}
+            onChange={(e) => setHoneypot(e.target.value)}
+          />
+
           <input
             placeholder="Name"
             value={form.name}
             onChange={(e) => setForm({ ...form, name: e.target.value })}
             required
+            maxLength={100}
             className={inputClass}
           />
           <input
@@ -77,6 +112,7 @@ export function Contact() {
             value={form.email}
             onChange={(e) => setForm({ ...form, email: e.target.value })}
             required
+            maxLength={150}
             className={inputClass}
           />
           <input
@@ -84,6 +120,7 @@ export function Contact() {
             placeholder="Phone (optional)"
             value={form.phone}
             onChange={(e) => setForm({ ...form, phone: e.target.value })}
+            maxLength={30}
             className={inputClass}
           />
           <textarea
@@ -92,15 +129,30 @@ export function Contact() {
             onChange={(e) => setForm({ ...form, message: e.target.value })}
             required
             rows={5}
+            maxLength={2000}
             className={inputClass}
           />
+
+          {/* Simple Math CAPTCHA */}
+          <div className="flex items-center gap-3 mt-2">
+            <span className="text-sm font-medium text-noir/80">
+              What is {captchaNum1} + {captchaNum2}?
+            </span>
+            <input
+              type="number"
+              required
+              value={captchaAnswer}
+              onChange={(e) => setCaptchaAnswer(e.target.value)}
+              className={`${inputClass} w-24`}
+            />
+          </div>
 
           {error && <p className="text-sm text-crimson">{error}</p>}
 
           <button
             type="submit"
             disabled={createInquiry.isPending}
-            className="self-start rounded-full bg-crimson px-8 py-3 text-sm font-bold tracking-wide text-white uppercase transition-colors hover:bg-noir disabled:opacity-50"
+            className="mt-2 self-start rounded-full bg-crimson px-8 py-3 text-sm font-bold tracking-wide text-white uppercase transition-colors hover:bg-noir disabled:opacity-50"
           >
             {createInquiry.isPending ? 'Sending…' : 'Send Inquiry'}
           </button>
