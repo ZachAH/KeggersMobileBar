@@ -103,6 +103,7 @@ export function Contact() {
             value={form.name}
             onChange={(e) => setForm({ ...form, name: e.target.value })}
             required
+            minLength={2}
             maxLength={100}
             className={inputClass}
           />
@@ -121,6 +122,8 @@ export function Contact() {
             value={form.phone}
             onChange={(e) => setForm({ ...form, phone: e.target.value })}
             maxLength={30}
+            pattern="^[\d\s\-\+\(\)]*$"
+            title="Please enter a valid phone number (numbers, spaces, dashes, or parentheses)"
             className={inputClass}
           />
           <textarea
@@ -128,6 +131,7 @@ export function Contact() {
             value={form.message}
             onChange={(e) => setForm({ ...form, message: e.target.value })}
             required
+            minLength={15}
             rows={5}
             maxLength={2000}
             className={inputClass}
