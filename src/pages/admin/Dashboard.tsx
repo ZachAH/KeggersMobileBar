@@ -8,6 +8,7 @@ import { useCreateLocation, useDeleteLocation, useLocations } from '../../hooks/
 import { useSEO } from '../../hooks/useSEO'
 import { auth } from '../../lib/firebase'
 import type { Inquiry } from '../../types/inquiry'
+import { formatTime } from '../../utils/time'
 
 function buildReplyMailto(inquiry: Inquiry) {
   const subject = 'Re: Your Inquiry — Keggers Mobile Bar'
@@ -185,7 +186,7 @@ export function Dashboard() {
                 <div>
                   <p className="font-semibold text-noir">{loc.venue_name}</p>
                   <p className="text-sm text-noir/60">
-                    {loc.event_date} · {loc.start_time}–{loc.end_time}
+                    {loc.event_date} · {formatTime(loc.start_time)}–{formatTime(loc.end_time)}
                   </p>
                 </div>
               </div>

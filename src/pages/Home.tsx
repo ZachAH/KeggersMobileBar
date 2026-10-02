@@ -5,6 +5,7 @@ import { Testimonials } from '../components/Testimonials'
 import { TickerStrip } from '../components/TickerStrip'
 import { useLocations } from '../hooks/useLocations'
 import { useSEO } from '../hooks/useSEO'
+import { formatTime } from '../utils/time'
 
 const galleryPreview = [
   { src: '/preview/charitable-event.jpg', label: 'Community & Charity Events' },
@@ -158,7 +159,7 @@ export function Home() {
                         month: 'long',
                         day: 'numeric',
                       })}{' '}
-                      · {loc.start_time}–{loc.end_time}
+                      · {formatTime(loc.start_time)}–{formatTime(loc.end_time)}
                     </p>
                   </div>
                 </div>

@@ -2,6 +2,7 @@ import { Breadcrumbs } from '../components/Breadcrumbs'
 import { SectionHeading } from '../components/SectionHeading'
 import { useLocations } from '../hooks/useLocations'
 import { useSEO } from '../hooks/useSEO'
+import { formatTime } from '../utils/time'
 
 export function WhereWellBe() {
   useSEO({
@@ -46,7 +47,7 @@ export function WhereWellBe() {
                   month: 'long',
                   day: 'numeric',
                 })}{' '}
-                · {loc.start_time}–{loc.end_time}
+                · {formatTime(loc.start_time)}–{formatTime(loc.end_time)}
               </p>
               {loc.notes && <p className="mt-2 text-sm text-noir/75">{loc.notes}</p>}
             </div>
