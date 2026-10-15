@@ -5,7 +5,7 @@ import { Testimonials } from '../components/Testimonials'
 import { TickerStrip } from '../components/TickerStrip'
 import { useLocations } from '../hooks/useLocations'
 import { useSEO } from '../hooks/useSEO'
-import { formatTime } from '../utils/time'
+import { formatDate, formatTimeRange, splitLocationsByDate } from '../utils/time'
 
 const galleryPreview = [
   { src: '/preview/charitable-event.jpg', label: 'Community & Charity Events' },
@@ -29,7 +29,8 @@ export function Home() {
       "Keggers Mobile Bar is a family-owned mobile bar service in Wisconsin, specializing in handcrafted mocktails alongside signature cocktails and beer & wine service for weddings, private parties, corporate events, and charitable events.",
   })
   const { data: locations } = useLocations()
-  const upcoming = locations?.slice(0, 2)
+  const { upcoming: upcomingLocations } = splitLocationsByDate(locations)
+  const upcoming = upcomingLocations.slice(0, 2)
   const [videoReady, setVideoReady] = useState(false)
   const [messageIndex, setMessageIndex] = useState(0)
 
@@ -154,12 +155,9 @@ export function Home() {
                     <p className="font-semibold">{loc.venue_name}</p>
                     <p className="text-sm text-noir/60">{loc.address}</p>
                     <p className="mt-1 text-sm text-noir/60">
-                      {new Date(loc.event_date).toLocaleDateString(undefined, {
-                        weekday: 'long',
-                        month: 'long',
-                        day: 'numeric',
-                      })}{' '}
-                      · {formatTime(loc.start_time)}–{formatTime(loc.end_time)}
+                      {formatDate(loc.event_date)}
+                      {(loc.start_time || loc.end_time) &&
+                        ` · ${formatTimeRange(loc.start_time, loc.end_time)}`}
                     </p>
                   </div>
                 </div>

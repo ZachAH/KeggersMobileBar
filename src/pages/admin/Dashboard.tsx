@@ -8,7 +8,7 @@ import { useCreateLocation, useDeleteLocation, useLocations } from '../../hooks/
 import { useSEO } from '../../hooks/useSEO'
 import { auth } from '../../lib/firebase'
 import type { Inquiry } from '../../types/inquiry'
-import { formatTime } from '../../utils/time'
+import { formatDate, formatTimeRange, splitLocationsByDate } from '../../utils/time'
 
 function buildReplyMailto(inquiry: Inquiry) {
   const subject = 'Re: Your Inquiry — Keggers Mobile Bar'
@@ -36,6 +36,7 @@ export function Dashboard() {
   useSEO({ title: 'Admin Dashboard', description: 'Admin dashboard for Keggers Mobile Bar.', noindex: true })
   const navigate = useNavigate()
   const { data: locations, isLoading } = useLocations()
+  const { upcoming, past } = splitLocationsByDate(locations)
   const createLocation = useCreateLocation()
   const deleteLocation = useDeleteLocation()
   const { data: inquiries, isLoading: inquiriesLoading } = useInquiries()
@@ -111,28 +112,37 @@ export function Dashboard() {
           required
           className={inputClass}
         />
-        <div className="flex gap-3">
-          <input
-            type="date"
-            value={form.event_date}
-            onChange={(e) => setForm({ ...form, event_date: e.target.value })}
-            required
-            className={`flex-1 ${inputClass}`}
-          />
-          <input
-            type="time"
-            value={form.start_time}
-            onChange={(e) => setForm({ ...form, start_time: e.target.value })}
-            required
-            className={`flex-1 ${inputClass}`}
-          />
-          <input
-            type="time"
-            value={form.end_time}
-            onChange={(e) => setForm({ ...form, end_time: e.target.value })}
-            required
-            className={`flex-1 ${inputClass}`}
-          />
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+          <div>
+            <label className="block text-xs font-semibold text-noir/70">Event Date</label>
+            <input
+              type="date"
+              value={form.event_date}
+              onChange={(e) => setForm({ ...form, event_date: e.target.value })}
+              required
+              className={`mt-1 w-full ${inputClass}`}
+            />
+          </div>
+          <div>
+            <label className="block text-xs font-semibold text-noir/70">Start Time (CST)</label>
+            <input
+              type="time"
+              value={form.start_time}
+              onChange={(e) => setForm({ ...form, start_time: e.target.value })}
+              required
+              className={`mt-1 w-full ${inputClass}`}
+            />
+          </div>
+          <div>
+            <label className="block text-xs font-semibold text-noir/70">End Time (CST)</label>
+            <input
+              type="time"
+              value={form.end_time}
+              onChange={(e) => setForm({ ...form, end_time: e.target.value })}
+              required
+              className={`mt-1 w-full ${inputClass}`}
+            />
+          </div>
         </div>
         <textarea
           placeholder="Notes (optional)"
@@ -167,10 +177,15 @@ export function Dashboard() {
       </form>
 
       <div className="mt-8">
-        <h2 className="font-semibold text-noir">Upcoming stops</h2>
+        <h2 className="font-semibold text-noir">
+          Upcoming stops {upcoming.length > 0 && `(${upcoming.length})`}
+        </h2>
         {isLoading && <p className="mt-2 text-noir/70">Loading…</p>}
+        {!isLoading && upcoming.length === 0 && (
+          <p className="mt-2 text-sm text-noir/60">No upcoming stops scheduled.</p>
+        )}
         <ul className="mt-2 space-y-3">
-          {locations?.map((loc) => (
+          {upcoming.map((loc) => (
             <li
               key={loc.id}
               className="flex items-start justify-between gap-4 rounded-lg border border-noir/10 bg-white p-4 shadow-sm"
@@ -185,9 +200,12 @@ export function Dashboard() {
                 )}
                 <div>
                   <p className="font-semibold text-noir">{loc.venue_name}</p>
-                  <p className="text-sm text-noir/60">
-                    {loc.event_date} · {formatTime(loc.start_time)}–{formatTime(loc.end_time)}
+                  <p className="text-sm text-noir/60">{loc.address}</p>
+                  <p className="text-sm font-medium text-noir/70">
+                    {formatDate(loc.event_date)}
+                    {(loc.start_time || loc.end_time) && ` · ${formatTimeRange(loc.start_time, loc.end_time)}`}
                   </p>
+                  {loc.notes && <p className="mt-1 text-xs text-noir/70">{loc.notes}</p>}
                 </div>
               </div>
               <button
@@ -200,6 +218,55 @@ export function Dashboard() {
           ))}
         </ul>
       </div>
+
+      {past.length > 0 && (
+        <div className="mt-8">
+          <h2 className="font-semibold text-noir">
+            Past / Completed stops ({past.length})
+          </h2>
+          <p className="mt-1 text-xs text-noir/60">
+            Ordered from most recent to oldest.
+          </p>
+          <ul className="mt-2 space-y-3">
+            {past.map((loc) => (
+              <li
+                key={loc.id}
+                className="flex items-start justify-between gap-4 rounded-lg border border-noir/10 bg-white/75 p-4 shadow-sm"
+              >
+                <div className="flex items-start gap-3">
+                  {loc.image_url && (
+                    <img
+                      src={loc.image_url}
+                      alt={loc.venue_name}
+                      className="h-14 w-14 shrink-0 rounded object-cover"
+                    />
+                  )}
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <p className="font-semibold text-noir">{loc.venue_name}</p>
+                      <span className="rounded bg-noir/10 px-1.5 py-0.5 text-[10px] font-semibold text-noir/60 uppercase">
+                        Completed
+                      </span>
+                    </div>
+                    <p className="text-sm text-noir/60">{loc.address}</p>
+                    <p className="text-sm font-medium text-noir/70">
+                      {formatDate(loc.event_date)}
+                      {(loc.start_time || loc.end_time) && ` · ${formatTimeRange(loc.start_time, loc.end_time)}`}
+                    </p>
+                    {loc.notes && <p className="mt-1 text-xs text-noir/70">{loc.notes}</p>}
+                  </div>
+                </div>
+                <button
+                  onClick={() => deleteLocation.mutate(loc)}
+                  className="shrink-0 text-sm text-crimson underline"
+                >
+                  Remove
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
 
       <MenuManager />
 
