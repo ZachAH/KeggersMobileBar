@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { Breadcrumbs } from '../components/Breadcrumbs'
 import { SectionHeading } from '../components/SectionHeading'
 import { faq } from '../data/faq'
@@ -6,9 +7,9 @@ import { useSEO } from '../hooks/useSEO'
 
 export function WhatWeOffer() {
   useSEO({
-    title: 'What We Offer',
+    title: 'What We Offer — Mobile Bartending & Bar Tap Rentals in Wisconsin',
     description:
-      'Mocktail bar service, cocktail bar service, and beer & wine service for weddings, corporate events, and private parties throughout Wisconsin — plus frequently asked questions.',
+      'Explore mobile bartending, bar tap rentals, handcrafted mocktail bars, cocktail catering, and beer & wine service across Wisconsin. Get a free quote.',
   })
 
   return (
@@ -41,6 +42,56 @@ export function WhatWeOffer() {
             {service.footer && <p className="mt-3 text-xs text-noir/50">{service.footer}</p>}
           </div>
         ))}
+      </div>
+
+      <h2 className="font-serif mt-16 text-center text-4xl font-semibold text-noir">
+        Bar Tap Rentals in Wisconsin
+      </h2>
+      <p className="mx-auto mt-2 max-w-2xl text-center text-sm text-noir/70">
+        Turnkey mobile bar trailer, kegerator tap equipment, and insured bartending delivered
+        directly to your event anywhere in Wisconsin.
+      </p>
+      <div className="mt-8 grid gap-6 sm:grid-cols-3">
+        <div className="rounded-lg border border-noir/10 bg-white p-5 shadow-sm">
+          <p className="text-xs font-semibold tracking-wide text-crimson uppercase">
+            Equipment &amp; Dimensions
+          </p>
+          <p className="mt-1 font-semibold text-noir">Vintage Mobile Bar Trailer</p>
+          <p className="mt-2 text-sm text-noir/70">
+            Our converted mobile bar trailer measures 7ft wide &times; 12ft deep &times; 8.5ft tall
+            and plugs into a standard 120V outlet (quiet generator available for remote outdoor
+            venues).
+          </p>
+        </div>
+        <div className="rounded-lg border border-noir/10 bg-white p-5 shadow-sm">
+          <p className="text-xs font-semibold tracking-wide text-crimson uppercase">
+            Tap Setups &amp; BYOB
+          </p>
+          <p className="mt-1 font-semibold text-noir">Draft Beer, Wine &amp; Signature Pours</p>
+          <p className="mt-2 text-sm text-noir/70">
+            Ideal for draft kegs, chilled wine, batch cocktails, and handcrafted mocktails. You
+            purchase your alcohol at retail cost (BYOB) and we supply the tap setup, mixers,
+            garnishes, and certified bartenders.
+          </p>
+        </div>
+        <div className="rounded-lg border border-noir/10 bg-white p-5 shadow-sm">
+          <p className="text-xs font-semibold tracking-wide text-crimson uppercase">
+            Rental Coverage
+          </p>
+          <p className="mt-1 font-semibold text-noir">Serving All of Wisconsin</p>
+          <p className="mt-2 text-sm text-noir/70">
+            Based in southeast Wisconsin and serving Southern, Central, and Northern Wisconsin for
+            weddings, tailgates, corporate gatherings, and private parties.
+          </p>
+        </div>
+      </div>
+      <div className="mt-6 text-center">
+        <Link
+          to="/contact"
+          className="inline-block bg-crimson px-6 py-3 text-xs font-bold tracking-wide text-white uppercase transition-colors hover:bg-noir"
+        >
+          Request a Bar Tap Rental Quote
+        </Link>
       </div>
 
       <h2 className="font-serif mt-16 text-center text-4xl font-semibold text-noir">

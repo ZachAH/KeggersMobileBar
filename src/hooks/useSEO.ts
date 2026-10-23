@@ -21,7 +21,7 @@ function setMetaTag(attr: 'name' | 'property', key: string, content: string) {
 
 export function useSEO({ title, description, noindex = false }: SEOOptions) {
   useEffect(() => {
-    const fullTitle = title === SITE_NAME ? title : `${title} | ${SITE_NAME}`
+    const fullTitle = title.startsWith(SITE_NAME) ? title : `${title} | ${SITE_NAME}`
     const canonicalUrl = `${SITE_URL}${window.location.pathname}`
 
     document.title = fullTitle

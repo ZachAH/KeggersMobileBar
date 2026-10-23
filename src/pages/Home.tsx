@@ -24,9 +24,9 @@ const loadingMessages = [
 
 export function Home() {
   useSEO({
-    title: 'Keggers Mobile Bar',
+    title: 'Keggers Mobile Bar | Mobile Bartending & Tap Rentals in Wisconsin',
     description:
-      "Keggers Mobile Bar is a family-owned mobile bar service in Wisconsin, specializing in handcrafted mocktails alongside signature cocktails and beer & wine service for weddings, private parties, corporate events, and charitable events.",
+      'Serving southeast Wisconsin with mobile bar catering, kegerator tap rentals, and bartending for weddings & private events. Get a free quote.',
   })
   const { data: locations } = useLocations()
   const { upcoming: upcomingLocations } = splitLocationsByDate(locations)
@@ -129,6 +129,85 @@ export function Home() {
             </Link>
           </div>
         </Reveal>
+      </div>
+
+      <div className="border-t border-noir/10 bg-white px-6 py-20 sm:py-24">
+        <div className="mx-auto max-w-5xl">
+          <Reveal>
+            <p className="text-center text-xs font-semibold tracking-[0.25em] text-crimson uppercase">
+              Mobile Bar Trailer &amp; Tap Service
+            </p>
+            <h2 className="font-serif mt-2 text-center text-3xl font-semibold sm:text-4xl">
+              Bar Tap Rentals in Wisconsin
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-center text-base text-noir/70">
+              Whether you're planning a wedding reception, backyard celebration, or corporate
+              gathering, Keggers Mobile Bar delivers a turnkey mobile bar trailer, kegerator tap
+              setup, and certified bartending service straight to your venue.
+            </p>
+          </Reveal>
+          <div className="mt-12 grid gap-6 sm:grid-cols-3">
+            <Reveal delay={50}>
+              <div className="h-full rounded-xl border border-noir/10 bg-paper p-6 shadow-sm">
+                <p className="text-xs font-semibold tracking-wide text-crimson uppercase">
+                  Equipment &amp; Trailer Specs
+                </p>
+                <h3 className="font-serif mt-1 text-2xl font-semibold">Vintage Mobile Bar</h3>
+                <p className="mt-3 text-sm text-noir/70">
+                  Our custom-outfitted 7ft &times; 12ft mobile bar trailer (8.5ft tall) features
+                  cold storage, commercial prep space, and runs on a standard 120V outlet — with a
+                  quiet generator available for off-grid outdoor venues.
+                </p>
+              </div>
+            </Reveal>
+            <Reveal delay={150}>
+              <div className="h-full rounded-xl border border-noir/10 bg-paper p-6 shadow-sm">
+                <p className="text-xs font-semibold tracking-wide text-crimson uppercase">
+                  Custom Tap &amp; Pour Setups
+                </p>
+                <h3 className="font-serif mt-1 text-2xl font-semibold">
+                  Kegs, Cocktails &amp; Mocktails
+                </h3>
+                <p className="mt-3 text-sm text-noir/70">
+                  Serve chilled draft beer, wine, batch cocktails, or our signature handcrafted
+                  mocktails. With Wisconsin-compliant BYOB service, you supply the kegs and spirits
+                  at retail cost while our insured bartenders handle the taps and pours.
+                </p>
+              </div>
+            </Reveal>
+            <Reveal delay={250}>
+              <div className="h-full rounded-xl border border-noir/10 bg-paper p-6 shadow-sm">
+                <p className="text-xs font-semibold tracking-wide text-crimson uppercase">
+                  Statewide Rental Coverage
+                </p>
+                <h3 className="font-serif mt-1 text-2xl font-semibold">
+                  Southeast, Southern &amp; Central WI
+                </h3>
+                <p className="mt-3 text-sm text-noir/70">
+                  Based in southeast Wisconsin, we travel throughout Southern, Central, and Northern
+                  Wisconsin — bringing full bar tap rentals, cups, ice, homemade syrups, and fresh
+                  garnishes right to your event.
+                </p>
+              </div>
+            </Reveal>
+          </div>
+          <Reveal delay={300}>
+            <div className="mt-10 flex flex-wrap justify-center gap-4">
+              <Link
+                to="/contact"
+                className="bg-crimson px-7 py-3.5 text-sm font-bold tracking-wide text-white uppercase transition-colors hover:bg-noir"
+              >
+                Get a Free Quote
+              </Link>
+              <Link
+                to="/what-we-offer"
+                className="border border-noir px-7 py-3.5 text-sm font-semibold tracking-wide uppercase transition-colors hover:bg-noir hover:text-white"
+              >
+                Explore Packages &amp; FAQ
+              </Link>
+            </div>
+          </Reveal>
+        </div>
       </div>
 
       <div className="bg-noir px-6 py-20 text-white sm:py-28">
